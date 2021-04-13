@@ -1,0 +1,29 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("C:\Users\user1\Desktop\clean_it\clean_it\src\assets\bgImg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.container__main__text {
+    color: #ffffff;
+    font-weight: 400;
+    padding: 10px 30px;
+    border-radius: 0 30px;
+    font-size: 2rem;
+    background: linear-gradient(45deg, black, transparent);
+    background: #085078;
+    background: -webkit-linear-gradient(to right, #85D8CE, #085078);
+    background: linear-gradient(to right, #85D8CE, #085078);
+}
+
+.container__main__text-red{
+    color: red;
+}

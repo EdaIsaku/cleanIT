@@ -1,0 +1,38 @@
+.form__input{
+    padding: 15px;
+    width: 50%;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid #093c74;
+    background-color: transparent !important;
+    outline: none;
+    font-size: 1rem;
+    font-family: Roboto;
+}
+
+.form__input::placeholder {
+    color: #093c74;
+    font-size: 1.1rem;
+    font-weight: 100;
+}
+
+.form__input:focus{
+    border-bottom: 2px solid red;
+}
+.form__input:focus.form__input::placeholder{
+   font-size: 1rem;
+    color: red;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+}
