@@ -1,7 +1,8 @@
 .form{
-    width: 60vw;
-    height: 50vh;
-    max-width: 700px;
+    width: 50vw;
+    min-height: 50vh;
+    max-width: 600px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,4 +38,17 @@
 .form__submit:active{
     position: relative;
     top: 1px;
+}
+.form__title{
+    color: #0cce62;
+    margin: 0;
+}
+
+.form__subtitle{
+    font-style: italic;
+}
+.form__link{
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #FF416C;
 }
