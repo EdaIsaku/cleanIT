@@ -6,7 +6,7 @@ import Fade from "react-reveal/Fade"
 class SignInForm extends React.Component{
     render(){
         return(
-            <Fade right duration={600} distance="200px">
+            <Fade right duration={600} distance="50px">
                 <div className="form">
                     <h1 className="form__title">Welcome!</h1>
                     <p className="form__subtitle">Please Sign In to start making our country green!</p>
