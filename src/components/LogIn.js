@@ -3,7 +3,6 @@ import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-
 import "./LogIn.css"
 
 

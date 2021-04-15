@@ -4,6 +4,7 @@ import "./Form.css";
 import {Link} from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import {auth} from "../../src/firebase";
+import SignUpSuccess from "./SignUpSuccess"
 
 class SignUpForm extends React.Component{
     state = { 
@@ -54,9 +55,11 @@ class SignUpForm extends React.Component{
     render(){
         const {username, email, password, confirmPass,isSignedUp} = this.state
         return (
-                isSignedUp ? ( <h1>Success</h1>) : 
-                    ( <Fade left duration={600} distance="50px">
+                
+                <Fade left duration={600} distance="50px">
                     <div className="form">
+                    {isSignedUp ? (<SignUpSuccess/>) : 
+                        (<>
                         <h1 className="form__title">Welcome!</h1>
                         <p className="form__subtitle">Please Sign Up to start making our country green!</p>
                         <Input value={username} handleChange={this.handleChange} type="text" name={'username'} placeholder="Name..."/>
@@ -64,9 +67,10 @@ class SignUpForm extends React.Component{
                         <Input value={password} handleChange={this.handleChange} type="password" name={'password'} placeholder="Password..."/>
                         <Input value={confirmPass} handleChange={this.handleChange} type="password" name={'confirmPass'} placeholder="Confirm Password..."/>
                         <Input handleSubmit={this.handleSubmit} type="button" className={'form__submit'} value="Sign Up"/>
-                        <Link to="/signIn" className="form__link">Already signed up?</Link>
+                            <Link to="/signIn" className="form__link">Already signed up?</Link>
+                            </>)}
                     </div>
-                </Fade>)
+                </Fade>
         )
     }
 }
