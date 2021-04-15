@@ -1,8 +1,9 @@
-import React from "react"
-import Input from "./Input"
-import {Link} from "react-router-dom"
+import React from "react";
+import Input from "./Input";
+import {Link} from "react-router-dom";
 import Fade from "react-reveal/Fade";
-import {auth} from "../../src/firebase"
+import {auth} from "../../src/firebase";
+import {withRouter} from "react-router-dom";
 
 class SignInForm extends React.Component{
     state = {
@@ -14,20 +15,23 @@ handleChange = (ev) => {
     const{name, value} = ev.target;
     this.setState({
         [name]: value
-    }, console.log(this.state))
+    })
 }
 
 handleSubmit = () => {
     const{email, password} =this.state;
     auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-        console.log(user);
+        // Signed in
+        var user = userCredential.user;
+        if(user){
+            this.props.history.push('/app')
+      }
     })
     .catch((error) => {
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.error(errorCode,errorMessage)
     });
 }
 
@@ -47,4 +51,4 @@ handleSubmit = () => {
     }
 }
 
-export default SignInForm
+export default withRouter(SignInForm)

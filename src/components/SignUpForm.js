@@ -37,9 +37,9 @@ class SignUpForm extends React.Component{
          }
         })
         .catch((error) => {
-        //   var errorCode = error.code;
-        //   var errorMessage = error.message;
-          // ..
+           var errorCode = error.code;
+           var errorMessage = error.message;
+           console.error(errorCode, errorMessage) 
         });
     }
 
@@ -51,6 +51,7 @@ class SignUpForm extends React.Component{
             confirmPass: ''
         })
     }
+
 
     render(){
         const {username, email, password, confirmPass,isSignedUp} = this.state
