@@ -1,7 +1,7 @@
 .form__input{
     padding: 15px;
-    width: 60%;
-    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
     border: none;
     border-bottom: 1px solid #093c74;
     background-color: transparent !important;
@@ -9,6 +9,52 @@
     font-size: 1rem;
     font-family: Roboto;
 }
+
+.form__control{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+.form__control__icons{
+    position: absolute;
+    right: 10px;
+    /* top: 50%; */
+    transform: translateY(-50%);
+    color:#fff;
+    visibility: hidden;
+    font-size: 1.4rem;
+}
+
+.form__control__errorMessage {
+    visibility: hidden;
+}
+
+
+.form__control.success .form__input{
+    border: 1px solid #0cce62;
+}
+.form__control.success .success__icon{
+        visibility: visible;
+        color:#0cce62;
+}
+.form__control.error .form__input{
+    border: 1px solid red;
+}
+
+.form__control.error .error__icon{
+        visibility: visible;
+        color: red;
+}
+
+.form__control.error .form__control__errorMessage{
+    visibility: visible;
+}
+
+
 
 .form__input::placeholder {
     color: #093c74;
@@ -35,4 +81,15 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     background-color: transparent;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+
+.form__input-success{
+    border: 2px solid #0cce62;
+}
+.form__input-success:focus{
+    border: 2px solid #0cce62;
+}
+.form__input-error{
+    border: 2px solid red;
 }
