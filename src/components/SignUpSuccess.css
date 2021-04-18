@@ -1,0 +1,46 @@
+.signedUp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signedUp__icon{
+    font-size: 4rem;
+    color:  #0cce62;
+    padding: 15px;
+    border: 1px solid #0cce62;
+    border-radius: 50%;
+}
+
+.signedUp__title{
+    font-family: "Lato";
+    color: #0d557c;
+}
+
+.signedUp__subtitle{
+    color: #0d557c;
+
+}
+
+.signedUp__button{
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    border: none;
+    background: #0cebeb;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #29ffc6, #20e3b2, #0cebeb);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #29ffc6, #20e3b2, #0cebeb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+}
+
+.signedUp__button:hover{
+    background: #0cebeb;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #29ffc6, #20e3b2, #0cebeb);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #29ffc6, #20e3b2, #0cebeb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        color: #fff;
+}
