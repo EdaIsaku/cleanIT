@@ -1,7 +1,7 @@
 .container{
     width: 100vw;
     height: 100vh;
-    background-image: url("C:\Users\user1\Desktop\clean_it\clean_it\src\assets\bgImg.jpg");
+    background-image: url("../assets/bgImg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
