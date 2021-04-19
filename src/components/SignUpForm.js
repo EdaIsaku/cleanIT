@@ -15,18 +15,37 @@ class SignUpForm extends React.Component{
         password: '',
         confirmPass: '',
         isSignedUp: false,
-        errors:[]
+        errors:{
+            username:{
+                result:'',
+                message:''
+            },
+            email: {
+                result:'',
+                message:''
+            },
+            password:{
+                result: '',
+                message: ''
+            }
+        },
+        shouldCheckInput: false
     }
 
     handleChange = (ev) => {
+        const {username} = this.state
       const {name,value} = ev.target;
       this.setState({
           [name]:value
       })
+      
     }
     
     handleSubmit = () => {
         const{email, password} = this.state
+        this.setState({
+            shouldCheckInput: true
+        })
         this.validateData()
         //#region Make request to Firebase
         auth.createUserWithEmailAndPassword(email, password)
@@ -63,54 +82,143 @@ class SignUpForm extends React.Component{
     validateData = () => {
      const {username, email, password, confirmPass} = this.state
      this.validateUsername(username)
+     this.validateEmail(email)
+     this.validatePassword(password,confirmPass)
+     
 
    }
 
-    validateUsername = (username) => {
-    const userErrors = []    
+validateUsername = (username) => {
+        console.log('called');
+        let {errors:{
+            username:{
+                message,
+                result,
+            }
+        }} = this.state;
+       result=''
+       message=''
     if(username.trim().length < 3){
-        userErrors.push('Username is too short or empty!')
+        result = 'error'
+        message = 'Username is too short or empty!'
         }
     if(!(/^([^0-9]*)$/).test(username)){
-        userErrors.push('Username can not contain numbers!')
+        result = 'error'
+        message ='Username can not contain numbers!'
     }
-    if(userErrors.length >0){
-        this.setState ({
-            errors: this.state.errors.concat(userErrors)
-        })
-        return false
-    } else {
-        this.setState({errors:[]}) //HERE
+    if(result){
+            this.setState(prevState => (
+                {
+                    ...prevState,errors:{...prevState.errors,username:{result,message}}
+                }
+            ))
+            return false
+        } else {
+            this.setState(prevState => (
+                {
+                    ...prevState,errors:{...prevState.errors,username:{result:'success',message:''}}
+                }
+            ))
         return true
     }
    }
 
-   checkInput = (input) => {
-        const {errors} = this.state;
-        const validation = {
-            result:'success',
-            message:''
-        };
-        errors.forEach( (el) => {
-            if(el.toLowerCase().includes(input)){
-                validation['result'] = 'error'
-                validation['message'] = el
+   validateEmail = (email) => {
+       let {errors:{
+           email:{
+               message,
+               result
+           }
+       }} = this.state
+       let emailTest= new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+       message=''
+       result = ''
+       if(email.trim() < 4){
+            message = 'Email is too short or empty!'
+            result = 'error'
+       }
+
+       if(!emailTest.test(email)){
+        message = 'Email is not valid format!'
+        result = 'error'
+       }
+     if(result){
+        this.setState(prevState => (
+            {
+                ...prevState,errors:{...prevState.errors,email:{result,message}}
             }
-        })
-        return validation;
+        ))
+        return false
+    } else {
+        this.setState(prevState => (
+            {
+                ...prevState,errors:{...prevState.errors,email:{result:'success',message:''}}
+            }
+        ))
+    return true
+}
+     
    }
 
-//    validatePassword = (password, confirmPass) => {
-//        const errors = []
-//        if((!password) && (!confirmPass)){
-//         errors.push('Password is required')
-//        }
+   validatePassword = (password, confirmPass) => {
+    let {errors:{
+        password:{
+            message,
+            result
+        }
+    }} = this.state
 
-//    }
+    message = '';
+    result = '';
+
+    if((!password) && (!confirmPass)){
+     message = 'Password && Confirm Password is required!'
+     result = 'error'
+    }
+    if(password !== confirmPass) {
+     message = "Your password don't match!"
+     result = 'error'
+    }
+
+    if(result){
+        this.setState(prevState => (
+            {
+                ...prevState,errors:{...prevState.errors,password:{result,message}}
+            }
+        ))
+        return false
+    } else {
+        this.setState(prevState => (
+            {
+                ...prevState,errors:{...prevState.errors,password:{result:'success',message:''}}
+            }
+        ))
+    return true
+    }
+
+}
+
+   checkInput = (input) => {
+        
+       console.log('from Input',input)
+        const {result,message} = this.state.errors[input];
+        return {result,message};
+   }
+
+
+   removeError = (input) => {
+       const {errors} = this.state;
+       const filteredErrors = errors.filter(el => (!el.toLowerCase().includes(input)))
+       console.log(filteredErrors);
+       this.setState({
+           errors: filteredErrors
+       })
+   }
+
 
     render(){
-        const {username, email, password, confirmPass,isSignedUp} = this.state
-            
+        const {username, email, password, confirmPass,isSignedUp,shouldCheckInput} = this.state
+        console.log(this.state)
         return (
                 <Fade left duration={600} distance="50px">
                     <div className="form">
@@ -118,10 +226,10 @@ class SignUpForm extends React.Component{
                         (<>
                             <h1 className="form__title">Welcome!</h1>
                             <p className="form__subtitle">Please Sign Up to start making our country green!</p>
-                            <Input validation={username && this.checkInput('username')} value={username}  handleChange={this.handleChange} type="text" name={'username'} placeholder="Name..."/>
-                            <Input validation={email && this.checkInput('email')} value={email} handleChange={this.handleChange} type="email" name={'email'} placeholder="Email..."/>
-                            <Input validation={password && this.checkInput('password')} value={password} handleChange={this.handleChange} type="password" name={'password'} placeholder="Password..."/>
-                            <Input validation={confirmPass && this.checkInput('confirmPassword')} value={confirmPass} handleChange={this.handleChange} type="password" name={'confirmPass'} placeholder="Confirm Password..."/>
+                            <Input validation={shouldCheckInput && this.checkInput('username')} value={username}  handleChange={this.handleChange} type="text" name={'username'} placeholder="Name..."/>
+                            <Input validation={shouldCheckInput && this.checkInput('email')} value={email} handleChange={this.handleChange} type="email" name={'email'} placeholder="Email..."/>
+                            <Input validation={shouldCheckInput && this.checkInput('password')} value={password} handleChange={this.handleChange} type="password" name={'password'} placeholder="Password..."/>
+                            <Input validation={shouldCheckInput && this.checkInput('password')} value={confirmPass} handleChange={this.handleChange} type="password" name={'confirmPass'} placeholder="Confirm Password..."/>
                             <Input handleSubmit={this.handleSubmit} type="button" className={'form__submit'} value="Sign Up"/>
                             <Link to="/signIn" className="form__link">Already signed up?</Link>
                         </>)}
