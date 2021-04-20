@@ -54,8 +54,6 @@
     visibility: visible;
 }
 
-
-
 .form__input::placeholder {
     color: #093c74;
     font-size: 1.1rem;

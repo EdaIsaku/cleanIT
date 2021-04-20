@@ -33,12 +33,14 @@ class SignUpForm extends React.Component{
     }
 
     handleChange = (ev) => {
-        const {username} = this.state
+      this.setState({
+          shouldCheckInput: true
+      })
+      this.validateData()
       const {name,value} = ev.target;
       this.setState({
           [name]:value
       })
-      
     }
     
     handleSubmit = () => {
@@ -65,8 +67,6 @@ class SignUpForm extends React.Component{
            console.error(errorCode, errorMessage) 
         });
         //#endregion 
-        
-
     }
 
     clearState = () => {
@@ -84,20 +84,20 @@ class SignUpForm extends React.Component{
      this.validateUsername(username)
      this.validateEmail(email)
      this.validatePassword(password,confirmPass)
-     
+     }
 
-   }
-
-validateUsername = (username) => {
-        console.log('called');
+   validateUsername = (username) => {
+        // console.log('called');
         let {errors:{
             username:{
                 message,
                 result,
             }
         }} = this.state;
-       result=''
-       message=''
+
+       result='';
+       message='';
+
     if(username.trim().length < 3){
         result = 'error'
         message = 'Username is too short or empty!'
@@ -130,14 +130,16 @@ validateUsername = (username) => {
                result
            }
        }} = this.state
+
        let emailTest= new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
-       message=''
-       result = ''
-       if(email.trim() < 4){
+       
+       message='';
+       result = '';
+
+       if(email.trim().length < 4){
             message = 'Email is too short or empty!'
             result = 'error'
        }
-
        if(!emailTest.test(email)){
         message = 'Email is not valid format!'
         result = 'error'
@@ -156,8 +158,7 @@ validateUsername = (username) => {
             }
         ))
     return true
-}
-     
+} 
    }
 
    validatePassword = (password, confirmPass) => {
@@ -179,7 +180,6 @@ validateUsername = (username) => {
      message = "Your password don't match!"
      result = 'error'
     }
-
     if(result){
         this.setState(prevState => (
             {
@@ -199,26 +199,25 @@ validateUsername = (username) => {
 }
 
    checkInput = (input) => {
-        
-       console.log('from Input',input)
+    //    console.log('from Input',input)
         const {result,message} = this.state.errors[input];
         return {result,message};
    }
 
 
-   removeError = (input) => {
-       const {errors} = this.state;
-       const filteredErrors = errors.filter(el => (!el.toLowerCase().includes(input)))
-       console.log(filteredErrors);
-       this.setState({
-           errors: filteredErrors
-       })
-   }
+//    removeError = (input) => {
+//        const {errors} = this.state;
+//        const filteredErrors = errors.filter(el => (!el.toLowerCase().includes(input)))
+//        console.log(filteredErrors);
+//        this.setState({
+//            errors: filteredErrors
+//        })
+//    }
 
 
     render(){
         const {username, email, password, confirmPass,isSignedUp,shouldCheckInput} = this.state
-        console.log(this.state)
+        // console.log(this.state)
         return (
                 <Fade left duration={600} distance="50px">
                     <div className="form">
