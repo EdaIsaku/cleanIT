@@ -33,9 +33,6 @@ class SignUpForm extends React.Component{
     }
 
     handleChange = (ev) => {
-      this.setState({
-          shouldCheckInput: true
-      })
       this.validateData()
       const {name,value} = ev.target;
       this.setState({
@@ -48,25 +45,26 @@ class SignUpForm extends React.Component{
         this.setState({
             shouldCheckInput: true
         })
-        this.validateData()
-        //#region Make request to Firebase
-        auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // Signed in 
-            var user = userCredential.user;
-            if(user){
-                this.setState({
-                    isSignedUp: true
-                },this.clearState)
-                
-         }
-        })
-        .catch((error) => {
-           var errorCode = error.code;
-           var errorMessage = error.message;
-           console.error(errorCode, errorMessage) 
-        });
-        //#endregion 
+        if(this.validateData()){
+            //#region Make request to Firebase
+            auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Signed in 
+                var user = userCredential.user;
+                if(user){
+                    this.setState({
+                        isSignedUp: true
+                    },this.clearState)
+                    
+             }
+            })
+            .catch((error) => {
+               var errorCode = error.code;
+               var errorMessage = error.message;
+               console.error(errorCode, errorMessage) 
+            });
+            //#endregion 
+        }
     }
 
     clearState = () => {
@@ -81,10 +79,10 @@ class SignUpForm extends React.Component{
     //TODO Errors and Validation
     validateData = () => {
      const {username, email, password, confirmPass} = this.state
-     this.validateUsername(username)
-     this.validateEmail(email)
-     this.validatePassword(password,confirmPass)
-     }
+     if(this.validateUsername(username) && this.validateEmail(email) &&this.validatePassword(password,confirmPass)){
+         return true
+      } else {return false}
+    }
 
    validateUsername = (username) => {
         // console.log('called');
@@ -131,18 +129,18 @@ class SignUpForm extends React.Component{
            }
        }} = this.state
 
-       let emailTest= new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+       let emailTest= new RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
        
        message='';
        result = '';
 
-       if(email.trim().length < 4){
-            message = 'Email is too short or empty!'
-            result = 'error'
-       }
        if(!emailTest.test(email)){
         message = 'Email is not valid format!'
         result = 'error'
+       }
+       if(email.trim().length < 4){
+            message = 'Email is too short or empty!'
+            result = 'error'
        }
      if(result){
         this.setState(prevState => (
