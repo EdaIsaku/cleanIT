@@ -16,8 +16,7 @@ function Input ({type, placeholder, value, className, name, handleChange, handle
                     <small className="form__control__errorMessage">{`*${validation.message}`}</small>
                     </>)
                 }
-            </div>)
-        
+            </div>)       
 }
 
 export default Input
