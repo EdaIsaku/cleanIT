@@ -1,8 +1,8 @@
 import React from "react";
-import Input from "./Input";
+import Input from "../Input/Input";
 import {Link} from "react-router-dom";
 import Fade from "react-reveal/Fade";
-import {auth} from "../../src/firebase";
+import {auth} from "../../firebase";
 import {withRouter} from "react-router-dom";
 
 class SignInForm extends React.Component{
@@ -18,8 +18,7 @@ class SignInForm extends React.Component{
                 result: "",
                 message: ""
             }
-        }, shouldCheckInput: false,
-        authorized: false
+        }, shouldCheckInput: false
     }
 
 handleChange = (ev) => {
@@ -39,10 +38,8 @@ handleSubmit = () => {
     .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-        console.log(user)
         if(user){
             this.props.history.push('/app');
-            // this.clearState;
       }
     })
     .catch((error) => {
@@ -70,7 +67,6 @@ handleSubmit = () => {
             }
         ))
     }
-  
     });
 }
 
@@ -121,21 +117,21 @@ validateEmail = (email) => {
 }
 
 validatePassword = () => {
-    const {password, authorized} = this.state
+    const {password} = this.state
     let {errors:{
         password:{
             result,
             message
         }
     }} = this.state
+
     result = '';
-    message = ''
-    if(password.length<1){
+    message = '';
+
+    if(password.length < 1){
         result = "error"
         message = "Please fill in your Password"
     } 
-
-    console.log(result)
 
     if(result){
         this.setState(prevState => (
@@ -166,12 +162,11 @@ checkInput = (input) => {
 
     render(){
         const {shouldCheckInput} = this.state
-        // console.log(this.state);
         return(
             <Fade right duration={600} distance="50px">
                 <div className="form">
                     <h1 className="form__title">Welcome!</h1>
-                    <p className="form__subtitle">Please Sign In to start making our country green!</p>
+                    <p className="form__subtitle">Please <span className="form__subtitle-red">Sign In</span> to start making our country green!</p>
                     <Input validation={shouldCheckInput && this.checkInput("email")} handleChange={this.handleChange} type="email" name={'email'} placeholder="Email..."/>
                     <Input validation={shouldCheckInput && this.checkInput("password")} handleChange={this.handleChange} type="password" name={'password'} placeholder="Password..."/> 
                     <Input handleSubmit={this.handleSubmit} type="button" className={'form__submit'} value="Sign In"/> 

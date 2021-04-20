@@ -22,7 +22,6 @@
 .form__control__icons{
     position: absolute;
     right: 10px;
-    /* top: 50%; */
     transform: translateY(-50%);
     color:#fff;
     visibility: hidden;
@@ -33,14 +32,15 @@
     visibility: hidden;
 }
 
-
 .form__control.success .form__input{
     border: 1px solid #0cce62;
 }
+
 .form__control.success .success__icon{
         visibility: visible;
         color:#0cce62;
 }
+
 .form__control.error .form__input{
     border: 1px solid red;
 }
@@ -63,6 +63,7 @@
 .form__input:focus{
     border-bottom: 2px solid red;
 }
+
 .form__input:focus.form__input::placeholder{
    font-size: 1rem;
     color: red;
@@ -78,16 +79,17 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     background-color: transparent;
-  transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
 }
-
 
 .form__input-success{
-    border: 2px solid #0cce62;
+    border: 1px solid #0cce62;
 }
+
 .form__input-success:focus{
-    border: 2px solid #0cce62;
+    border: 1px solid #0cce62;
 }
+
 .form__input-error{
-    border: 2px solid red;
+    border: 1px solid red;
 }

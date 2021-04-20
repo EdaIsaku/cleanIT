@@ -1,4 +1,4 @@
-import LogIn from "./components/LogIn"
+import LogIn from "../src/components/LogIn/LogIn.js"
 
 function App() {
 

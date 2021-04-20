@@ -1,9 +1,8 @@
 import React from "react"
-import { FaCheck } from 'react-icons/fa';
-import Input from "./Input"
+import { FaCheck } from 'react-icons/fa'
+import Input from "../Input/Input"
 import "./SignUpSuccess.css"
 import {Link} from "react-router-dom"
-
 
 class SignUpSuccess extends React.Component{
     render(){

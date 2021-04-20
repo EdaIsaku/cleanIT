@@ -1,10 +1,9 @@
 import React from "react"
-import SignUpForm from "./SignUpForm";
-import SignInForm from "./SignInForm";
+import SignUpForm from "../Form/SignUpForm";
+import SignInForm from "../Form/SignInForm";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import "./LogIn.css"
-
 
    class LogIn extends React.Component{
        render(){

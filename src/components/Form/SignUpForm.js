@@ -1,10 +1,10 @@
 import React from "react";
-import Input from "./Input";
+import Input from "../Input/Input";
 import "./Form.css";
 import {Link} from "react-router-dom";
 import Fade from "react-reveal/Fade";
-import {auth} from "../../src/firebase";
-import SignUpSuccess from "./SignUpSuccess"
+import {auth} from "../../firebase";
+import SignUpSuccess from "../SignUpSuccess/SignUpSuccess"
 
 
 
@@ -85,7 +85,6 @@ class SignUpForm extends React.Component{
     }
 
    validateUsername = (username) => {
-        // console.log('called');
         let {errors:{
             username:{
                 message,
@@ -197,32 +196,19 @@ class SignUpForm extends React.Component{
 }
 
    checkInput = (input) => {
-    //    console.log('from Input',input)
         const {result,message} = this.state.errors[input];
         return {result,message};
    }
 
-
-//    removeError = (input) => {
-//        const {errors} = this.state;
-//        const filteredErrors = errors.filter(el => (!el.toLowerCase().includes(input)))
-//        console.log(filteredErrors);
-//        this.setState({
-//            errors: filteredErrors
-//        })
-//    }
-
-
     render(){
         const {username, email, password, confirmPass,isSignedUp,shouldCheckInput} = this.state
-        // console.log(this.state)
         return (
                 <Fade left duration={600} distance="50px">
                     <div className="form">
                     {isSignedUp ? (<SignUpSuccess/>) : 
                         (<>
                             <h1 className="form__title">Welcome!</h1>
-                            <p className="form__subtitle">Please Sign Up to start making our country green!</p>
+                            <p className="form__subtitle">Please <span className="form__subtitle-red">Sign Up</span> to start making our country green!</p>
                             <Input validation={shouldCheckInput && this.checkInput('username')} value={username}  handleChange={this.handleChange} type="text" name={'username'} placeholder="Name..."/>
                             <Input validation={shouldCheckInput && this.checkInput('email')} value={email} handleChange={this.handleChange} type="email" name={'email'} placeholder="Email..."/>
                             <Input validation={shouldCheckInput && this.checkInput('password')} value={password} handleChange={this.handleChange} type="password" name={'password'} placeholder="Password..."/>
