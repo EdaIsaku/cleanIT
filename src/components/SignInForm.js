@@ -18,10 +18,15 @@ class SignInForm extends React.Component{
                 result: "",
                 message: ""
             }
-        }, shouldCheckInput: false
+        }, shouldCheckInput: false,
+        authorized: false
     }
 
 handleChange = (ev) => {
+    this.setState({
+        shouldCheckInput: true
+    })
+    this.validateData()
     const{name, value} = ev.target;
     this.setState({
         [name]: value
@@ -38,7 +43,11 @@ handleSubmit = () => {
     .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
+        console.log(user)
         if(user){
+            this.setState({
+                authorized: true
+            })
             this.props.history.push('/app');
             // this.clearState;
       }
@@ -70,7 +79,7 @@ validateEmail = (email) => {
     result = "";
     message = "";
 
-    if(email.trim() < 4){
+    if(email.trim().length < 4){
         result = "error"
         message = "Email is to short!"
     }
@@ -97,16 +106,31 @@ validateEmail = (email) => {
 }
 
 validatePassword = () => {
+    const {password, authorized} = this.state
+    let {errors:{
+        password:{
+            result,
+            message
+        }
+    }} = this.state
 
-    const {password} = this.state
-    console.log(password)
-    // let {errors:{
-    //     password:{
-    //         result,
-    //         message
-    //     }
-    // }} = this.state
+    if(!authorized){
+        result = "error"
+        message = "Password incorrect"
+        console.log("cant log in")
+    } 
+    // if(authorized){
+    //     console.log("welcome")
+    // }
 
+    if(result){
+        this.setState(prevState => (
+            {
+                ...prevState, errors:{...prevState.errors,password:{result, message}}
+            }
+        ))
+        return false
+    }
 }
 
 validateData = () => {

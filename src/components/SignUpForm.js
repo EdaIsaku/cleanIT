@@ -136,7 +136,7 @@ class SignUpForm extends React.Component{
        message='';
        result = '';
 
-       if(email.trim() < 4){
+       if(email.trim().length < 4){
             message = 'Email is too short or empty!'
             result = 'error'
        }
