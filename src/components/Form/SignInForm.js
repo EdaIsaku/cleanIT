@@ -38,9 +38,16 @@ handleSubmit = () => {
     .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
+       
         if(user){
             this.props.history.push('/app');
       }
+    // if(user){
+    //     console.log("loged");
+        
+    //     <Redirect to="/app" component={Map} />
+    // }
+    
     })
     .catch((error) => {
         let {errors:{

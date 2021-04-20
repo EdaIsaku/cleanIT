@@ -1,6 +1,7 @@
 import React from "react"
 import SignUpForm from "../Form/SignUpForm";
 import SignInForm from "../Form/SignInForm";
+import Map from "../Map"
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import "./LogIn.css"
@@ -18,6 +19,9 @@ import "./LogIn.css"
                         </Route>
                         <Route exact path="/signIn">
                             <SignInForm/>
+                        </Route>
+                        <Route exact path="/app">
+                            <Map/>
                         </Route>
        ````       </Switch>
                 </Router>
