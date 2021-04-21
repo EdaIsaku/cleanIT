@@ -1,19 +1,28 @@
 import React from "react"
-import { MapsComponent, LayersDirective, LayerDirective } from '@syncfusion/ej2-react-maps';
-// import { MapsComponent} from '@syncfusion/ej2-react-maps';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 import "./Map.css"
 
 class Map extends React.Component{
-        render() {
-             return (
-               // <div id="container"> <MapsComponent/> </div>
-            <MapsComponent id="maps">
-                <LayersDirective>
-                    <LayerDirective layerType='OSM'/>
-                </LayersDirective>
-            </MapsComponent>, document.getElementById("maps"));
-        }
+    render(){
+        const position = [51.505, -0.09]
+        return (
+            <div id="mapid">
+                <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+                <TileLayer
+                attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={position}>
+                <Popup>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+                </Marker>
+            </MapContainer>
+            </div>
+        )
+    }
+    
 }
 
 export default Map
