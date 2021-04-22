@@ -1,0 +1,12 @@
+.tools{
+    width: 200px;
+    height: 400px;
+    position: absolute;
+    top: 200px;
+    left: 40px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: -2px 4px 37px -2px rgba(255,255,255,0.88);
+-webkit-box-shadow: -2px 4px 37px -2px rgba(255,255,255,0.88);
+-moz-box-shadow: -2px 4px 37px -2px rgba(255,255,255,0.88);
+}

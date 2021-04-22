@@ -42,11 +42,6 @@ handleSubmit = () => {
         if(user){
             this.props.history.push('/app');
       }
-    // if(user){
-    //     console.log("loged");
-        
-    //     <Redirect to="/app" component={Map} />
-    // }
     
     })
     .catch((error) => {

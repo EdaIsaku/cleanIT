@@ -1,0 +1,24 @@
+.profile {
+    width:100px;
+    height: 100px;
+    border: 1px solid green;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    z-index: 1000;
+    top: 30px;
+    right: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -3px 0px 54px -9px rgba(12, 215, 167, 0.32);
+-webkit-box-shadow: -3px 0px 54px -9px rgba(12, 215, 167, 0.32);
+-moz-box-shadow: -3px 0px 54px -9px rgba(12, 215, 167, 0.32);
+} 
+
+.profile__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
