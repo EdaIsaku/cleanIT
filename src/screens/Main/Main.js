@@ -12,7 +12,7 @@ class Main extends Component{
             <div className="main">
                <User />
                <Tools />
-                <Map />
+               <Map />
             </div>
         )
     }

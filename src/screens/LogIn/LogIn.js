@@ -9,7 +9,7 @@ import "./LogIn.css"
    class LogIn extends React.Component{
        render(){
          return(
-             <div className="container">
+            <div className="container">
             <h1 className="container__main__text">We don't wanna live in a trash can, <span className="container__main__text-red"> stop making it one!</span></h1>
                 <Router>
                    <Switch>
