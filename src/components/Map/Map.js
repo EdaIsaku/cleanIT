@@ -1,10 +1,15 @@
 import {React, Component}  from "react"
-import { MapContainer, useMapEvents} from 'react-leaflet'
+import { MapContainer, useMapEvents,Popup,Marker} from 'react-leaflet'
 import L from "leaflet"
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch"
 import {BasemapLayer} from "react-esri-leaflet"
 import "./Map.css"
 import {garbageIcon} from "./Icon"
+import FadeExample from "../Slideshow/Slideshow" 
+import ReactDOMServer from "react-dom/server"
+
+
+let cleaned = true
 
 class Map extends Component{
     
@@ -12,17 +17,6 @@ class Map extends Component{
         //cennter of map in first render
         const position = [41.327953, 19.819025]
         
-        function LocationMarker() {
-            const map = useMapEvents({
-                click: (e) => {
-                    const { lat, lng } = e.latlng;
-                    var popup = L.popup().setContent(`${lat}  ${lng}`);
-                    L.marker([lat, lng], {icon: garbageIcon}).addTo(map).bindPopup(popup);
-                    // map.flyTo(e.latlng, map.getZoom())
-              }
-            });
-            return null;
-          }
 
         return (
                 <div className="main__body" >
@@ -42,7 +36,13 @@ class Map extends Component{
                                 results: (r) => {console.log(r);}
                             }}
                         />;
-                        <LocationMarker />
+                        <Marker position={position}>
+                                <Popup className={cleaned ? 'image__popup-two' :'image__popup-one' }>
+                                   <FadeExample cleaned={cleaned}/>
+
+                               {cleaned ?<FadeExample cleaned={cleaned}/> : null }    
+                                </Popup>
+                        </Marker>
                     </MapContainer>
                 </div>
         )
