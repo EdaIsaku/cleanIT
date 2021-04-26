@@ -6,7 +6,6 @@ import {Link} from "react-router-dom"
 
 class SignUpSuccess extends React.Component{
     render(){
-
         return(
            <div className="signedUp">
                <FaCheck className="signedUp__icon"/>
