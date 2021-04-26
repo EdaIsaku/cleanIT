@@ -3,16 +3,16 @@ import React from 'react';
 import { Fade } from 'react-slideshow-image';
 import './Slideshow.css'
 
-const FadeExample = ({cleaned}) => {
+const FadeExample = ({cleaned, order}) => {
   const fadeImages = [
-    "https://image.flaticon.com/icons/png/512/532/532755.png",
-    "https://image.flaticon.com/icons/png/512/532/532755.png",
-    "https://image.flaticon.com/icons/png/512/532/532755.png"
+    "https://api.time.com/wp-content/uploads/2021/03/trash-pandemic-covid-19-01.jpg",
+    "https://api.time.com/wp-content/uploads/2021/03/trash-pandemic-covid-19-01.jpg",
+    "https://api.time.com/wp-content/uploads/2021/03/trash-pandemic-covid-19-01.jpg"
   ];
 
   return (
       <div className={cleaned ? 'slide-container-two': 'slide-container-one'}>
-        <Fade>
+        <Fade className={order==='first'&&cleaned ? 'grayscale-cleaned': null}>
           <div className="each-fade">
             <div>
               <img src={fadeImages[0]} alt='img' />
@@ -27,7 +27,7 @@ const FadeExample = ({cleaned}) => {
           </div>
           <div className="each-fade">
             <div>
-              <img src={fadeImages[2]} alt='img'/>
+              <img src={fadeImages[2]} alt='img' />
             </div>
             <p>Third Slide</p>
           </div>

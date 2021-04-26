@@ -44,3 +44,7 @@
       justify-content: space-around;
       margin: 13px 0px;
   }
+
+  .grayscale-cleaned{
+    filter: grayscale(100%);
+  }
