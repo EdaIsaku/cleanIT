@@ -1,5 +1,5 @@
-import React,{Component}  from "react"
-import { MapContainer, useMapEvents} from 'react-leaflet'
+import React, {Component}  from "react"
+import { MapContainer} from 'react-leaflet'
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch"
 import {BasemapLayer} from "react-esri-leaflet";
 import  CustomMarker from './Marker';
@@ -14,7 +14,6 @@ class Map extends Component{
         markers:[]
     }
 
-
     handleMapClick = (e) =>{
         const {latlng:{lat,lng}} = e;
        this.setState( prevState => ({markers: prevState.markers.concat({lat,lng})}))
@@ -27,7 +26,7 @@ class Map extends Component{
         return(
 
                 <div className="main__body" >
-            <MapContainer center={center} zoom={11} scrollWheelZoom={true}>
+            <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
           
                     <BasemapLayer name="Topographic"  />
                        <EsriLeafletGeoSearch 
