@@ -1,40 +1,60 @@
-import React from "react"
-import { MapContainer, TileLayer, LayersControl,Marker, Popup} from 'react-leaflet'
-import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
-import {
-    BasemapLayer,FeatureLayer
-  } from "react-esri-leaflet";
-
+import React,{Component}  from "react"
+import { MapContainer, useMapEvents} from 'react-leaflet'
+import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch"
+import {BasemapLayer} from "react-esri-leaflet";
+import  CustomMarker from './Marker';
+import Events from './Events'
 import "./Map.css"
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
-class Map extends React.Component{
-  
+
+let cleaned = true
+class Map extends Component{
+
+    state = {
+        markers:[]
+    }
+
+
+    handleMapClick = (e) =>{
+        const {latlng:{lat,lng}} = e;
+       this.setState( prevState => ({markers: prevState.markers.concat({lat,lng})}))
+    }
+
     render(){
-        const position = [41.327953, 19.819025]
-        return (
-           
-                <div className="main__body">
-                    <MapContainer  center={position} zoom={17} scrollWheelZoom={true}>
-                    <BasemapLayer name="Topographic" />
+        //center of map in first render
+        const center = [41.327953, 19.819025]
+        const {markers} = this.state
+        return(
+
+                <div className="main__body" >
+            <MapContainer center={center} zoom={11} scrollWheelZoom={true}>
+          
+                    <BasemapLayer name="Topographic"  />
                        <EsriLeafletGeoSearch 
-                                providers={{
-                                    arcgisOnlineProvider: {
+                            providers={{
+                                arcgisOnlineProvider: {
                                     token: 'AAPK56eca1e43fa24ec7a292e2cdd06ce762Cfcy6XOKYW-VCWGCmM24T-E7l_WxtzU_vdw7b17KddOe_Z0_NGamfowgsIOjuo6A',
                                     label: "ArcGIS Online Results",
                                     maxResults: 10,
                                     countries:['Al']
                                     }
                                 }}
-                                useMapBounds={false}
-                                eventHandlers={{
-                                    results: (r) => {console.log(r);}
-                                }}
+                            useMapBounds={false}
+                            eventHandlers={{
+                                results: (r) => {console.log(r);}
+                            }}
+                        />;
+                        <Events handleMapClick={this.handleMapClick} />
+                        
+                        { 
+                         markers.map( (e) => <CustomMarker center={[e.lat,e.lng]} cleaned={cleaned} />)
+                        }
 
-                                />;
-                                
+                        
                     </MapContainer>
                 </div>
         )
+        
     }
 }
 
