@@ -1,42 +1,33 @@
-import {React, Component}  from "react"
-import { MapContainer, useMapEvents,Popup,Marker, MapConsumer} from 'react-leaflet'
+import React, {Component}  from "react"
+import { MapContainer} from 'react-leaflet'
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch"
-import {BasemapLayer} from "react-esri-leaflet"
+import {BasemapLayer} from "react-esri-leaflet";
+import  CustomMarker from './Marker';
+import Events from './Events'
 import "./Map.css"
-import FadeExample from "../Slideshow/Slideshow" 
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 
 let cleaned = true
-
 class Map extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-          currentPos: null
-        };
-        console.log(this.state)
-        this.handleClick = this.handleClick.bind(this);
-      }
-   
 
-      handleClick(e){
-        this.setState({ currentPos: e.latlng });
-        console.log(this.currentPos)
-      }
+    state = {
+        markers:[]
+    }
 
-    
+    handleMapClick = (e) =>{
+        const {latlng:{lat,lng}} = e;
+       this.setState( prevState => ({markers: prevState.markers.concat({lat,lng})}))
+    }
+
     render(){
-        //cennter of map in first render
+        //center of map in first render
         const center = [41.327953, 19.819025]
-        
-        return (
+        const {markers} = this.state
+        return(
+
                 <div className="main__body" >
-                    <MapContainer  center={center} zoom={11} scrollWheelZoom={true}>
-                    <MapConsumer>
-        {(map) => {
-          console.log('map center:', map.getCenter())
-          return null
-        }}
-      </MapConsumer>
+            <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
+          
                     <BasemapLayer name="Topographic"  />
                        <EsriLeafletGeoSearch 
                             providers={{
@@ -52,16 +43,17 @@ class Map extends Component{
                                 results: (r) => {console.log(r);}
                             }}
                         />;
-                       { this.state.currentPos && <Marker position={center} eventHandlers={{click: () => {console.log('marker clicked')},}}>
-                                <Popup className={cleaned ? 'image__popup-two' :'image__popup-one' }>
-                                    <FadeExample cleaned={cleaned} order={'first'}/>
+                        <Events handleMapClick={this.handleMapClick} />
+                        
+                        { 
+                         markers.map( (e) => <CustomMarker center={[e.lat,e.lng]} cleaned={cleaned} />)
+                        }
 
-                                     {cleaned ?<FadeExample cleaned={cleaned} order={'second'}/> : null }    
-                                </Popup>
-                        </Marker>}
+                        
                     </MapContainer>
                 </div>
         )
+        
     }
 }
 
