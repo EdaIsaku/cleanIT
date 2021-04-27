@@ -3,3 +3,16 @@
     width: 100%;
     height: 100%;
 }
+
+/* 
+.leaflet-control-container .leaflet-control.geocoder-control{
+    width: 100%;
+    position: absolute;
+    top:10px;
+    left:50px;
+    height: 50px;
+} */
+
+.geocoder-control.leaflet-control{
+    width: 1000px;
+}

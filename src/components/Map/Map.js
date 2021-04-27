@@ -6,10 +6,9 @@ import {
   } from "react-esri-leaflet";
 
 import "./Map.css"
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 class Map extends React.Component{
   
-
-
     render(){
         const position = [41.327953, 19.819025]
         return (
