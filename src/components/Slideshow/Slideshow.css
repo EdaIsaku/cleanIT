@@ -10,10 +10,11 @@
 .each-fade {
     display: flex;
     width: 100%;
+    height: 100%;
   }
   
   .each-fade > div {
-    width: 75%;
+    width: 100%;
   }
   
   .each-fade > div img {
@@ -22,7 +23,7 @@
     object-fit: cover;
   }
   
-  .each-fade p {
+  /* .each-fade p {
     width: 25%;
     font-size: 1em;
     display: flex;
@@ -31,7 +32,7 @@
     align-items: center;
     margin: 0;
     background: #adceed;
-  }
+  } */
   
 
   .leaflet-popup-content-wrapper {
@@ -42,10 +43,15 @@
   .leaflet-popup-content {
       display: flex;
       width: 100% !important;
+      height: 100%;
       justify-content: space-around;
       margin: 13px 0px;
   }
 
   .grayscale-cleaned{
     filter: grayscale(100%);
+  }
+
+  .dimensions{
+    height: 100%;
   }
