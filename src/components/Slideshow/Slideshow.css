@@ -23,16 +23,6 @@
   object-fit: cover;
 }
 
-/* .each-fade p {
-    width: 25%;
-    font-size: 1em;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    background: #adceed;
-  } */
 
 .leaflet-popup-content-wrapper {
   width: 100%;
@@ -51,6 +41,22 @@
   filter: grayscale(100%);
 }
 
-.dimensions {
-  height: 100%;
-}
+
+  .leaflet-popup-content-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .leaflet-popup-content {
+      display: flex;
+      width: 100% !important;
+      height: 100%;
+      justify-content: space-around;
+      margin: 13px 0px;
+  }
+
+  .grayscale-cleaned{
+    filter: grayscale(100%);
+  }
+
+ 

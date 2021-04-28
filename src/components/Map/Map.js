@@ -31,6 +31,7 @@ class Map extends Component {
     }));
   };
 
+
   render() {
     //center of map in first render
     const center = [41.327953, 19.819025];
@@ -58,6 +59,7 @@ class Map extends Component {
             // ref= {this.searchInput}
           />
           
+
           <Events handleMapClick={this.handleMapClick} />
           {markers.map((e) => (
             <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />
