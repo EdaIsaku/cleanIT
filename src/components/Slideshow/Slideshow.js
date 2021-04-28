@@ -12,7 +12,9 @@ const FadeExample = ({cleaned, order}) => {
 
   return (
       <div className={cleaned ? 'slide-container-two': 'slide-container-one'}>
-        <Fade className={order==='first'&&cleaned ? 'grayscale-cleaned dimensions': 'dimensions'} >
+
+        <Fade duration={1000}  className={order==='first'&&cleaned ? 'grayscale-cleaned': null}>
+
           <div className="each-fade">
             <div>
               <img src={fadeImages[0]} alt='img' />

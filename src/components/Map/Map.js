@@ -13,6 +13,15 @@ class Map extends Component {
     markers: [],
   };
 
+  constructor(props){
+    super(props)
+    //TODO
+    // this.searchInput = React.createRef();
+
+  }
+  
+
+
   handleMapClick = (e) => {
     const {
       latlng: { lat, lng },
@@ -21,6 +30,7 @@ class Map extends Component {
       markers: prevState.markers.concat({ lat, lng }),
     }));
   };
+
 
   render() {
     //center of map in first render
@@ -43,11 +53,13 @@ class Map extends Component {
             useMapBounds={false}
             eventHandlers={{
               results: (r) => {
-                console.log(r);
+                console.log(r)
               },
             }}
+            // ref= {this.searchInput}
           />
-          ;
+          
+
           <Events handleMapClick={this.handleMapClick} />
           {markers.map((e) => (
             <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />

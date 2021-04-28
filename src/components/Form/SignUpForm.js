@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import "./Form.css";
 import {Link} from "react-router-dom";
 import Fade from "react-reveal/Fade";
-import {auth} from "../../firebase";
+import {auth,firestore as db} from "../../firebase";
 import SignUpSuccess from "../SignUpSuccess/SignUpSuccess"
 
 
@@ -32,6 +32,21 @@ class SignUpForm extends React.Component{
         shouldCheckInput: false
     }
 
+    componentDidMount(){
+        // db.collection("users").add({
+        //     username: "Ada",
+        //     email: "Lovelace",
+        //     password: 1815,
+        //     signed: Date.now()
+        // })
+        // .then((docRef) => {
+        //     console.log("Document written with ID: ", docRef.id);
+        // })
+        // .catch((error) => {
+        //     console.error("Error adding document: ", error);
+        // });
+    }
+
     handleChange = (ev) => {
       this.validateData()
       const {name,value} = ev.target;
@@ -41,7 +56,7 @@ class SignUpForm extends React.Component{
     }
     
     handleSubmit = () => {
-        const{email, password} = this.state
+        const{email, password,username} = this.state
         this.setState({
             shouldCheckInput: true
         })
@@ -52,6 +67,15 @@ class SignUpForm extends React.Component{
                 // Signed in 
                 var user = userCredential.user;
                 if(user){
+                    db.collection('users').add({
+                        username,
+                        email,
+                        password,
+                        signed: Date.now()
+                    }).then(doc => {
+                        console.log("Document written with ID: ", doc.id);
+                    }).catch(err => console.error("Error adding document: ", err))
+                   
                     this.setState({
                         isSignedUp: true
                     },this.clearState)

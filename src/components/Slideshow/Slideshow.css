@@ -1,39 +1,46 @@
 @import "react-slideshow-image/dist/styles.css";
 
-.slide-container-two{
-    width: 40%;
+.slide-container-two {
+  width: 40%;
 }
-.slide-container-one{
-    width: 85%;
+.slide-container-one {
+  width: 85%;
 }
 
 .each-fade {
-    display: flex;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .each-fade > div {
-    width: 100%;
-  }
-  
-  .each-fade > div img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* .each-fade p {
-    width: 25%;
-    font-size: 1em;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    background: #adceed;
-  } */
-  
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.each-fade > div {
+  width: 100%;
+}
+
+.each-fade > div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.leaflet-popup-content-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-popup-content {
+  display: flex;
+  width: 100% !important;
+  height: 100%;
+  justify-content: space-around;
+  margin: 13px 0px;
+}
+
+.grayscale-cleaned {
+  filter: grayscale(100%);
+}
+
 
   .leaflet-popup-content-wrapper {
     width: 100%;
@@ -52,6 +59,4 @@
     filter: grayscale(100%);
   }
 
-  .dimensions{
-    height: 100%;
-  }
+ 
