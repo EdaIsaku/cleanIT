@@ -1,9 +1,10 @@
 import "./Tools.css"
+import image from '../../assets/bgImg.jpg'
 
 function Tool () {
     return (
         <div>
-            <img className="tool__icon" src="https://image.flaticon.com/icons/png/512/532/532755.png" alt="img"></img>
+            <img className="tool__icon" src={image} alt="img"></img>
         </div>
     )
 }
