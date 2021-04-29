@@ -1,21 +1,29 @@
-import React, {Component} from "react"
+import React, { Component, useContext, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 
-import Map from '../../components/Map/Map'
-import User from '../../components/User/User'
-import Tools from '../../components/Tools/Tools'
+import Map from "../../components/Map/Map";
+import User from "../../components/User/User";
+import Tools from "../../components/Tools/Tools";
+import { UserContext } from "../../components/User/UserProvider.js";
 
-import "./Main.css"
+import "./Main.css";
 
-class Main extends Component{
-    render(){
-        return (
-            <div className="main">
-               <User />
-               <Tools />
-               <Map />
-            </div>
-        )
-    }
+function Main({ user, history }) {
+  useEffect(() =>
+    setTimeout(() => {
+      if (!user) {
+        history.push("/");
+      }
+    }, 1000)
+  );
+
+  return (
+    <div className='main'>
+      <User user={user} />
+      <Tools />
+      <Map />
+    </div>
+  );
 }
 
-export default Main
+export default withRouter(Main);

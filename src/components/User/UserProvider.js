@@ -1,7 +1,27 @@
-import React, {Component,createContext} from 'react';
+import React, { Component, createContext } from "react";
+import { auth } from "../../firebase";
 
+export const UserContext = createContext({ user: null });
 
+class UserProvider extends Component {
+  state = {
+    user: null,
+  };
 
-class UserProvider extends Component{
-    
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      console.log("auth changed");
+      this.setState({ user });
+    });
+  }
+
+  render() {
+    return (
+      <UserContext.Provider value={this.state.user}>
+        {this.props.children}
+      </UserContext.Provider>
+    );
+  }
 }
+
+export default UserProvider;

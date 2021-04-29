@@ -67,6 +67,14 @@ class SignUpForm extends React.Component {
           var user = userCredential.user;
           //add user in firestore db
           if (user) {
+            user
+              .updateProfile({
+                displayName: username,
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
+
             db.collection("users")
               .add({
                 username,
@@ -268,56 +276,56 @@ class SignUpForm extends React.Component {
       shouldCheckInput,
     } = this.state;
     return (
-      <Fade left duration={600} distance="50px">
-        <div className="form">
+      <Fade left duration={600} distance='50px'>
+        <div className='form'>
           {isSignedUp ? (
             <SignUpSuccess />
           ) : (
             <>
-              <h1 className="form__title">Welcome!</h1>
-              <p className="form__subtitle">
-                Please <span className="form__subtitle-red">Sign Up</span> to
+              <h1 className='form__title'>Welcome!</h1>
+              <p className='form__subtitle'>
+                Please <span className='form__subtitle-red'>Sign Up</span> to
                 start making our country green!
               </p>
               <Input
                 validation={shouldCheckInput && this.checkInput("username")}
                 value={username}
                 handleChange={this.handleChange}
-                type="text"
+                type='text'
                 name={"username"}
-                placeholder="Name..."
+                placeholder='Name...'
               />
               <Input
                 validation={shouldCheckInput && this.checkInput("email")}
                 value={email}
                 handleChange={this.handleChange}
-                type="email"
+                type='email'
                 name={"email"}
-                placeholder="Email..."
+                placeholder='Email...'
               />
               <Input
                 validation={shouldCheckInput && this.checkInput("password")}
                 value={password}
                 handleChange={this.handleChange}
-                type="password"
+                type='password'
                 name={"password"}
-                placeholder="Password..."
+                placeholder='Password...'
               />
               <Input
                 validation={shouldCheckInput && this.checkInput("password")}
                 value={confirmPass}
                 handleChange={this.handleChange}
-                type="password"
+                type='password'
                 name={"confirmPass"}
-                placeholder="Confirm Password..."
+                placeholder='Confirm Password...'
               />
               <Input
                 handleSubmit={this.handleSubmit}
-                type="button"
+                type='button'
                 className={"form__submit"}
-                value="Sign Up"
+                value='Sign Up'
               />
-              <Link to="/signIn" className="form__link">
+              <Link to='/' className='form__link'>
                 Already signed up?
               </Link>
             </>

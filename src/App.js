@@ -1,14 +1,23 @@
-import {BrowserRouter as Router, Switch, Route,Link,Redirect} from "react-router-dom";
+import {
+  MemoryRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
-import LogIn from "./screens/LogIn/LogIn.js"
-import Main from "./screens/Main/Main"
+import LogIn from "./screens/LogIn/LogIn.js";
+import Main from "./screens/Main/Main";
 
-import './App.css'
+import "./App.css";
+import { UserContext } from "./components/User/UserProvider.js";
+import { useContext } from "react";
 
 function App(props) {
-  const user = props.user || false
+  const user = useContext(UserContext);
+
   return (
-    <div className="App">
+    <div className='App'>
       {/* <Router>
         <Switch>
         <Route exact path="/">  
@@ -19,15 +28,14 @@ function App(props) {
         </Route>
         </Switch>
      </Router> */}
-     <Router>
-        <Route exact path="/">
-            {user ? <Redirect to="/app" /> : <LogIn />}
+      <Router>
+        <Route exact path='/'>
+          {user ? <Redirect to='/app' /> : <LogIn />}
         </Route>
-        <Route exact path="/app">  
-                <Main />
-          </Route>
-     </Router>
-
+        <Route exact path='/app'>
+          <Main user={user} />
+        </Route>
+      </Router>
     </div>
   );
 }

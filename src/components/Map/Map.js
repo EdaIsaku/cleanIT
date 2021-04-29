@@ -13,14 +13,11 @@ class Map extends Component {
     markers: [],
   };
 
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     //TODO
     // this.searchInput = React.createRef();
-
   }
-  
-
 
   handleMapClick = (e) => {
     const {
@@ -31,15 +28,14 @@ class Map extends Component {
     }));
   };
 
-
   render() {
     //center of map in first render
     const center = [41.327953, 19.819025];
     const { markers } = this.state;
     return (
-      <div className="main__body">
+      <div className='main__body'>
         <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
-          <BasemapLayer name="Topographic" />
+          <BasemapLayer name='Topographic' />
           <EsriLeafletGeoSearch
             providers={{
               arcgisOnlineProvider: {
@@ -53,12 +49,11 @@ class Map extends Component {
             useMapBounds={false}
             eventHandlers={{
               results: (r) => {
-                console.log(r)
+                console.log(r);
               },
             }}
             // ref= {this.searchInput}
           />
-          
 
           <Events handleMapClick={this.handleMapClick} />
           {markers.map((e) => (
