@@ -68,6 +68,10 @@
   background-color: rgba(207, 18, 176, 1);
   color: #fff;
 }
+.profile__info__signOut:active {
+  position: relative;
+  top: 1px;
+}
 
 .profile__info__username {
   margin-top: 10px;
