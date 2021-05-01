@@ -8,6 +8,7 @@ import {
 
 import LogIn from "./screens/LogIn/LogIn.js";
 import Main from "./screens/Main/Main";
+import SignIn from "./components/Form/SignInForm";
 
 import "./App.css";
 import { UserContext } from "./components/User/UserProvider.js";
@@ -15,6 +16,15 @@ import { useContext } from "react";
 
 function App(props) {
   const user = useContext(UserContext);
+
+  const isUserSignedUp = (user) => {
+    if (!user) {
+      return null;
+    }
+    if (user.metadata.creationTime !== user.metadata.lastSignInTime) {
+      return true;
+    }
+  };
 
   return (
     <div className='App'>
@@ -30,10 +40,13 @@ function App(props) {
      </Router> */}
       <Router>
         <Route exact path='/'>
-          {user ? <Redirect to='/app' /> : <LogIn />}
+          {isUserSignedUp(user) ? <Redirect to='/app' /> : <LogIn />}
         </Route>
         <Route exact path='/app'>
           <Main user={user} />
+        </Route>
+        <Route exact path='/signIn'>
+          <SignIn />
         </Route>
       </Router>
     </div>

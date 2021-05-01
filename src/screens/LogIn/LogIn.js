@@ -23,6 +23,9 @@ class LogIn extends React.Component {
               <Route exact path='/'>
                 <SignInForm />
               </Route>
+              <Route exact path='/signIn'>
+                <SignInForm />
+              </Route>
               <Route exact path='/signUp'>
                 <SignUpForm />
               </Route>

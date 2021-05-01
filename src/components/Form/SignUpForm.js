@@ -65,16 +65,16 @@ class SignUpForm extends React.Component {
         .then((userCredential) => {
           // Signed in
           var user = userCredential.user;
-          //add user in firestore db
           if (user) {
             user
               .updateProfile({
                 displayName: username,
               })
-              .catch(function (error) {
+              .catch((error) => {
                 console.error(error);
               });
 
+            //add user in firestore db
             db.collection("users")
               .add({
                 username,

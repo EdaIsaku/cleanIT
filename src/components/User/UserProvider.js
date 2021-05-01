@@ -10,7 +10,7 @@ class UserProvider extends Component {
 
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
-      console.log("auth changed");
+      console.log(user);
       this.setState({ user });
     });
   }

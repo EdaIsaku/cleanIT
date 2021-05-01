@@ -1,49 +1,59 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, Component } from "react";
 import { auth, firebase as db } from "../../firebase";
 
 import "./User.css";
 import { UserContext } from "./UserProvider.js";
 
-function User({ user }) {
-  const [initials, setInitials] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
+class User extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      initials: "",
+      displayName: "",
+      email: "",
+    };
+  }
 
-  //   if (user && !displayName) {
-  //     const { displayName, email } = user;
-  //     setDisplayName(displayName);
-  //     setEmail(email);
-  //   }
-  const handleSignOut = () => {
+  componentDidMount() {
+    // this.setState({
+    //   displayName: this.props.displayName,
+    //   email: this.props.email,
+    // });
+  }
+
+  handleSignOut = () => {
     auth.signOut();
   };
 
-  //   const getInitials = (displayName) => {
-  //     const tmp = displayName.split(" ");
-  //     let initials = tmp[0][0].toUpperCase() + tmp[1][0].toUpperCase();
-  //     setInitials(initials);
-  //     return initials;
-  //   };
-  //   useEffect(() => getInitials(displayName));
+  getInitials = (displayName) => {
+    const tmp = displayName.split(" ");
+    let initials = tmp[0][0].toUpperCase() + tmp[1][0].toUpperCase();
+    // setInitials(initials);
+    return initials;
+  };
 
-  return (
-    <div className='profile'>
-      <div className='profile__user'>
-        <span className='profile__user__letters'>{initials}</span>
+  render() {
+    const { displayName, email } = this.state;
+
+    return (
+      <div className='profile'>
+        <div className='profile__user'>
+          <span className='profile__user__letters'>{""}</span>
+        </div>
+        <div className='profile__info'>
+          <b className='profile__info__username'>{displayName}</b>
+          <span className='profile__info__email'>{email}</span>
+          <input
+            type='button'
+            onClick={this.handleSignOut}
+            value='Sign out'
+            name=''
+            className='profile__info__signOut'
+          />
+        </div>
       </div>
-      <div className='profile__info'>
-        <b className='profile__info__username'>{displayName}</b>
-        <span className='profile__info__email'>{email}</span>
-        <input
-          type='button'
-          onClick={handleSignOut}
-          value='Sign out'
-          name=''
-          className='profile__info__signOut'
-        />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default User;
