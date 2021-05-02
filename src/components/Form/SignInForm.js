@@ -2,8 +2,9 @@ import React from "react";
 import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
-import { auth } from "../../firebase";
-import { withRouter } from "react-router-dom";
+import {connect} from 'react-redux'
+import { auth, firestore as db } from "../../firebase";
+import {fromSignUp} from '../../redux/actions/userActions'
 
 class SignInForm extends React.Component {
   state = {
@@ -40,9 +41,8 @@ class SignInForm extends React.Component {
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-
         if (user) {
-          this.props.history.push("/app");
+          this.props.fromSignUp(false)
         }
       })
       .catch((error) => {
@@ -56,9 +56,11 @@ class SignInForm extends React.Component {
         if (errorCode) {
           result = "error";
           message = errorMessage;
+          //TODO if email correct but pass no
           this.setState((prevState) => ({
             ...prevState,
             errors: { ...prevState.errors, password: { result, message } },
+            errors: { ...prevState.errors, email: { result, message } },
           }));
           return false;
         } else {
@@ -201,4 +203,8 @@ class SignInForm extends React.Component {
   }
 }
 
-export default withRouter(SignInForm);
+const mapDispatchToProps = (dispatch) => ({
+      fromSignUp: (status) => dispatch(fromSignUp(status))
+})
+
+export default connect(null,mapDispatchToProps)(SignInForm);

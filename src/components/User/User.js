@@ -2,7 +2,6 @@ import React, { useContext, Component } from "react";
 import { auth, firebase as db } from "../../firebase";
 
 import "./User.css";
-import { UserContext } from "./UserProvider.js";
 
 class User extends Component {
   constructor(props) {
@@ -15,10 +14,13 @@ class User extends Component {
   }
 
   componentDidMount() {
-    // this.setState({
-    //   displayName: this.props.displayName,
-    //   email: this.props.email,
-    // });
+    console.log('from user',this.props.user);
+      if(this.props.user){     
+        this.setState({
+          displayName: this.props.user.displayName,
+          email: this.props.user.email,
+        });
+      }
   }
 
   handleSignOut = () => {
@@ -28,17 +30,18 @@ class User extends Component {
   getInitials = (displayName) => {
     const tmp = displayName.split(" ");
     let initials = tmp[0][0].toUpperCase() + tmp[1][0].toUpperCase();
-    // setInitials(initials);
+    this.setState({
+      initials
+    })
     return initials;
   };
 
   render() {
-    const { displayName, email } = this.state;
-
+      const { displayName, email,initials } = this.state;
     return (
       <div className='profile'>
         <div className='profile__user'>
-          <span className='profile__user__letters'>{""}</span>
+          <span className='profile__user__letters'>{initials}</span>
         </div>
         <div className='profile__info'>
           <b className='profile__info__username'>{displayName}</b>

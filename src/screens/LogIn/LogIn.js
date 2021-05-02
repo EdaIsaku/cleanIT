@@ -1,14 +1,16 @@
 import React from "react";
 import SignUpForm from "../../components/Form/SignUpForm";
 import SignInForm from "../../components/Form/SignInForm";
+import Main from '../Main/Main'
 
-import { MemoryRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./LogIn.css";
 
 class LogIn extends React.Component {
   render() {
     return (
+
       <div className='container'>
         <h1 className='container__main__text'>
           We don't wanna live in a trash can,{" "}

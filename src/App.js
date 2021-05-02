@@ -1,56 +1,71 @@
+import { Component} from "react";
 import {
-  MemoryRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   Link,
   Redirect,
 } from "react-router-dom";
 
+import {connect} from 'react-redux'
+
 import LogIn from "./screens/LogIn/LogIn.js";
 import Main from "./screens/Main/Main";
 import SignIn from "./components/Form/SignInForm";
+import {auth} from './firebase'
 
 import "./App.css";
-import { UserContext } from "./components/User/UserProvider.js";
-import { useContext } from "react";
+import {setCurrentUser} from "./redux/actions/userActions.js";
 
-function App(props) {
-  const user = useContext(UserContext);
 
-  const isUserSignedUp = (user) => {
-    if (!user) {
-      return null;
-    }
-    if (user.metadata.creationTime !== user.metadata.lastSignInTime) {
-      return true;
-    }
-  };
+class App extends Component {
+  unsubscribeAuthListener = null
+  state = {
+    currentUser: null
+  }
+  
+  componentDidMount(){
+    this.unsubscribeAuthListener = auth.onAuthStateChanged( user => {   
+      // this.setState({currentUser:user})
+      this.props.setCurrentUser(user)
+    })
+  }
 
-  return (
-    <div className='App'>
-      {/* <Router>
-        <Switch>
-        <Route exact path="/">  
-              <LogIn />
+  componentWillUnmount(){
+    this.unsubscribeAuthListener()
+  }
+
+
+  render(){
+    const {currentUser,fromSignUp} = this.props
+    console.log('These are props',this.props)
+    return (
+      <div className='App'>
+        <Router>
+          <Route exact path='/'>
+            {currentUser && !fromSignUp ? <Redirect to='/app' /> : <LogIn/> }
           </Route>
-          <Route exact path="/app">  
-              <Main />
-        </Route>
-        </Switch>
-     </Router> */}
-      <Router>
-        <Route exact path='/'>
-          {isUserSignedUp(user) ? <Redirect to='/app' /> : <LogIn />}
-        </Route>
-        <Route exact path='/app'>
-          <Main user={user} />
-        </Route>
-        <Route exact path='/signIn'>
-          <SignIn />
-        </Route>
-      </Router>
-    </div>
-  );
+          <Route exact path='/app'>
+            <Main user={currentUser} />
+          </Route>
+          <Route exact path='/login'>
+            <LogIn />
+          </Route>
+        </Router>
+      </div>
+    );
+  }
+  
 }
 
-export default App;
+
+const mapDispatchToProps = (dispatch) => ({
+      setCurrentUser: (user) => dispatch(setCurrentUser(user)) 
+})
+
+const mapStateToProps = (state) =>({
+  currentUser: state.currentUser,
+  fromSignUp: state.fromSignUp
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -2,8 +2,10 @@ import React from "react";
 import Input from "../Input/Input";
 import "./Form.css";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
 import Fade from "react-reveal/Fade";
 import { auth, firestore as db } from "../../firebase";
+import {fromSignUp} from '../../redux/actions/userActions'
 import SignUpSuccess from "../SignUpSuccess/SignUpSuccess";
 
 class SignUpForm extends React.Component {
@@ -31,18 +33,7 @@ class SignUpForm extends React.Component {
   };
 
   componentDidMount() {
-    // db.collection("users").add({
-    //     username: "Ada",
-    //     email: "Lovelace",
-    //     password: 1815,
-    //     signed: Date.now()
-    // })
-    // .then((docRef) => {
-    //     console.log("Document written with ID: ", docRef.id);
-    // })
-    // .catch((error) => {
-    //     console.error("Error adding document: ", error);
-    // });
+
   }
 
   handleChange = (ev) => {
@@ -66,6 +57,7 @@ class SignUpForm extends React.Component {
           // Signed in
           var user = userCredential.user;
           if (user) {
+            // this.props.fromSignUp(true)
             user
               .updateProfile({
                 displayName: username,
@@ -76,16 +68,16 @@ class SignUpForm extends React.Component {
 
             //add user in firestore db
             db.collection("users")
-              .add({
-                username,
-                email,
-                password,
-                signed: Date.now(),
-              })
-              .then((doc) => {
-                console.log("Document written with ID: ", doc.id);
-              })
-              .catch((err) => console.error("Error adding document: ", err));
+            .add({
+              username,
+              email,
+              password,
+              signed: Date.now(),
+            })
+            .then((doc) => {
+              console.log("Document written with ID: ", doc.id);
+            })
+            .catch((err) => console.error("Error adding document: ", err));
 
             this.setState(
               {
@@ -325,7 +317,7 @@ class SignUpForm extends React.Component {
                 className={"form__submit"}
                 value='Sign Up'
               />
-              <Link to='/' className='form__link'>
+              <Link to='/signIn' className='form__link'>
                 Already signed up?
               </Link>
             </>
@@ -336,4 +328,9 @@ class SignUpForm extends React.Component {
   }
 }
 
-export default SignUpForm;
+const mapDispatchToProps = (dispatch) =>({
+  fromSignUp: (status) => dispatch(fromSignUp(status))
+
+})
+
+export default connect(null,mapDispatchToProps)(SignUpForm);

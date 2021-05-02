@@ -17,11 +17,10 @@ function Main({ user, history }) {
     }, 1000)
   );
 
-  console.log(user);
 
   return (
     <div className='main'>
-      <User />
+      <User user={user}/>
       <Tools />
       <Map />
     </div>
