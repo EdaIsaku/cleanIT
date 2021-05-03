@@ -196,6 +196,9 @@ class SignInForm extends React.Component {
           <Link className='form__link' to='/signUp'>
             Don't have an account yet?
           </Link>
+          <Link className='form__link' to='/forgotPassword'>
+            Forgot your password?
+          </Link>
         </div>
       </Fade>
     );

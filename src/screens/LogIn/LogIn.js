@@ -1,6 +1,7 @@
 import React from "react";
 import SignUpForm from "../../components/Form/SignUpForm";
 import SignInForm from "../../components/Form/SignInForm";
+import ForgotPassword from "../../components/Form/ForgotPassword";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -29,6 +30,9 @@ class LogIn extends React.Component {
               </Route>
               <Route exact path='/signUp'>
                 <SignUpForm />
+              </Route>
+              <Route exact path='/forgotPassword'>
+                <ForgotPassword />
               </Route>
             </Switch>
           </Router>
