@@ -75,6 +75,7 @@ class SignUpForm extends React.Component {
               signed: Date.now(),
             })
             .then((doc) => {
+              auth.signOut()
               console.log("Document written with ID: ", doc.id);
             })
             .catch((err) => console.error("Error adding document: ", err));

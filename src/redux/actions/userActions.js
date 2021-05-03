@@ -12,4 +12,6 @@ export const fromSignUp = (status) => ({
   payload: status
 })
 
+
+
 export default {setCurrentUser,fromSignUp}

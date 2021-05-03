@@ -1,7 +1,6 @@
 import React from "react";
 import SignUpForm from "../../components/Form/SignUpForm";
 import SignInForm from "../../components/Form/SignInForm";
-import Main from '../Main/Main'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 

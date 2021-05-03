@@ -1,10 +1,9 @@
-import React, { Component, useContext, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
 import Map from "../../components/Map/Map";
 import User from "../../components/User/User";
 import Tools from "../../components/Tools/Tools";
-import { UserContext } from "../../components/User/UserProvider.js";
 
 import "./Main.css";
 

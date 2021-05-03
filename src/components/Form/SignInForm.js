@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import {connect} from 'react-redux'
-import { auth, firestore as db } from "../../firebase";
+import { auth} from "../../firebase";
 import {fromSignUp} from '../../redux/actions/userActions'
 
 class SignInForm extends React.Component {
@@ -60,7 +60,6 @@ class SignInForm extends React.Component {
           this.setState((prevState) => ({
             ...prevState,
             errors: { ...prevState.errors, password: { result, message } },
-            errors: { ...prevState.errors, email: { result, message } },
           }));
           return false;
         } else {

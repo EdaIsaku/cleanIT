@@ -1,5 +1,5 @@
-import React, { useContext, Component } from "react";
-import { auth, firebase as db } from "../../firebase";
+import React, {  Component } from "react";
+import { auth } from "../../firebase";
 
 import "./User.css";
 
@@ -14,12 +14,11 @@ class User extends Component {
   }
 
   componentDidMount() {
-    console.log('from user',this.props.user);
       if(this.props.user){     
         this.setState({
           displayName: this.props.user.displayName,
           email: this.props.user.email,
-        });
+        },() => this.getInitials(this.state.displayName));
       }
   }
 
