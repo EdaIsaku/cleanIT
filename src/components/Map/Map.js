@@ -33,15 +33,15 @@ class Map extends Component {
     //center of map in first render
     const center = [41.327953, 19.819025];
     const { markers } = this.state;
-    const { addGarbage } = this.props;
-    console.log("from Map", addGarbage);
+    const { addGarbage, cursor } = this.props;
+    console.log("from Map", addGarbage, cursor);
     return (
       <div className='main__body'>
         <MapContainer
           center={center}
           zoom={15}
           scrollWheelZoom={true}
-          style={{ cursor: addGarbage ? "crosshair" : "pointer" }}
+          style={{ cursor: cursor }}
         >
           <BasemapLayer name='Topographic' />
           <EsriLeafletGeoSearch
@@ -75,6 +75,7 @@ class Map extends Component {
 
 const mapStateToProps = (state) => ({
   addGarbage: state.tools.addGarbage,
+  cursor: state.tools.cursor
 });
 
 export default connect(mapStateToProps)(Map);

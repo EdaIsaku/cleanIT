@@ -4,3 +4,12 @@ export const addGarbage = (status) => {
     payload: status,
   };
 };
+
+export const addStyle = (change) => {
+  return {
+    type: "ADD_STYLE",
+    payload: change,
+  }
+}
+
+export default {addGarbage, addStyle}

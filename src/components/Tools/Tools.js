@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 import "./Tools.css";
 import Tool from "./Tool";
 import { addGarbage } from "./../../redux/actions/toolsAction";
+import {addStyle} from "./../../redux/actions/toolsAction"
 
-function Tools({ addGarbage, addGarbageStatus }) {
+function Tools({ addGarbage, addGarbageStatus, addStyle }) {
+
   const handleClick = () => {
     addGarbage(!addGarbageStatus);
+    addStyle(addGarbageStatus===true ? "pointer" : "crosshair")
   };
   return (
     <div className='tools'>
@@ -18,6 +21,7 @@ function Tools({ addGarbage, addGarbageStatus }) {
 
 const mapDispatchToProps = (dispatch) => ({
   addGarbage: (status) => dispatch(addGarbage(status)),
+  addStyle: (change) => dispatch(addStyle(change)),
 });
 
 const mapStateToProps = (state) => ({
