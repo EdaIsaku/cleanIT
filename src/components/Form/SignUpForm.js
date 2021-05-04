@@ -2,10 +2,10 @@ import React from "react";
 import Input from "../Input/Input";
 import "./Form.css";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import Fade from "react-reveal/Fade";
 import { auth, firestore as db } from "../../firebase";
-import {fromSignUp} from '../../redux/actions/userActions'
+import { fromSignUp } from "../../redux/actions/userActions";
 import SignUpSuccess from "../SignUpSuccess/SignUpSuccess";
 
 class SignUpForm extends React.Component {
@@ -14,6 +14,7 @@ class SignUpForm extends React.Component {
     email: "",
     password: "",
     confirmPass: "",
+    displayName: "",
     isSignedUp: false,
     errors: {
       username: {
@@ -32,10 +33,7 @@ class SignUpForm extends React.Component {
     shouldCheckInput: false,
   };
 
-  componentDidMount() {
-
-  }
-
+  //add input values to State
   handleChange = (ev) => {
     this.validateData();
     const { name, value } = ev.target;
@@ -57,28 +55,30 @@ class SignUpForm extends React.Component {
           // Signed in
           var user = userCredential.user;
           if (user) {
-            // this.props.fromSignUp(true)
             user
               .updateProfile({
                 displayName: username,
+              })
+              .then(() => {
+                this.setState({ displayName: "success" });
               })
               .catch((error) => {
                 console.error(error);
               });
 
-            //add user in firestore db
+            //TODO add user in firestore db (seperate function)
             db.collection("users")
-            .add({
-              username,
-              email,
-              password,
-              signed: Date.now(),
-            })
-            .then((doc) => {
-              auth.signOut()
-              console.log("Document written with ID: ", doc.id);
-            })
-            .catch((err) => console.error("Error adding document: ", err));
+              .add({
+                username,
+                email,
+                password,
+                signed: Date.now(),
+              })
+              .then((doc) => {
+                auth.signOut();
+                console.log("Document written with ID: ", doc.id);
+              })
+              .catch((err) => console.error("Error adding document: ", err));
 
             this.setState(
               {
@@ -128,6 +128,7 @@ class SignUpForm extends React.Component {
     });
   };
 
+  //#region Validate Inputs
   //TODO Errors and Validation
   validateData = () => {
     const { username, email, password, confirmPass } = this.state;
@@ -254,11 +255,12 @@ class SignUpForm extends React.Component {
     }
   };
 
+  //Add class of error on input
   checkInput = (input) => {
     const { result, message } = this.state.errors[input];
     return { result, message };
   };
-
+  //#endregion
   render() {
     const {
       username,
@@ -329,9 +331,8 @@ class SignUpForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) =>({
-  fromSignUp: (status) => dispatch(fromSignUp(status))
+const mapDispatchToProps = (dispatch) => ({
+  fromSignUp: (status) => dispatch(fromSignUp(status)),
+});
 
-})
-
-export default connect(null,mapDispatchToProps)(SignUpForm);
+export default connect(null, mapDispatchToProps)(SignUpForm);
