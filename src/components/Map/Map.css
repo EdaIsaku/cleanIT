@@ -13,8 +13,7 @@
 }
 
 .leaflet-container.leaflet-grab {
-  cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"),
-    auto;
+  cursor: auto;
 }
 
 .leaflet-container .geocoder-control.geocoder-control.geocoder-control {

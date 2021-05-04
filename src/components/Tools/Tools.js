@@ -1,13 +1,27 @@
+import { connect } from "react-redux";
+
 import "./Tools.css";
 import Tool from "./Tool";
+import { addGarbage } from "./../../redux/actions/toolsAction";
 
-function Tools() {
+function Tools({ addGarbage, addGarbageStatus }) {
+  const handleClick = () => {
+    addGarbage(!addGarbageStatus);
+  };
   return (
     <div className='tools'>
-      <Tool />
+      <Tool handleClick={handleClick} />
       <Tool />
     </div>
   );
 }
 
-export default Tools;
+const mapDispatchToProps = (dispatch) => ({
+  addGarbage: (status) => dispatch(addGarbage(status)),
+});
+
+const mapStateToProps = (state) => ({
+  addGarbageStatus: state.tools.addGarbage,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tools);

@@ -1,5 +1,7 @@
-import React, {  Component } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { auth } from "../../firebase";
+import { fromSignUp } from "../../redux/actions/userActions";
 
 import "./User.css";
 
@@ -14,29 +16,39 @@ class User extends Component {
   }
 
   componentDidMount() {
-      if(this.props.user){     
-        this.setState({
+    if (this.props.user) {
+      this.setState(
+        {
           displayName: this.props.user.displayName,
           email: this.props.user.email,
-        },() => this.getInitials(this.state.displayName));
-      }
+        },
+        () => this.getInitials(this.state.displayName)
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    console.log(this.props);
   }
 
   handleSignOut = () => {
+    this.props.fromSignUp(true);
     auth.signOut();
   };
 
   getInitials = (displayName) => {
-    const tmp = displayName.split(" ");
-    let initials = tmp[0][0].toUpperCase() + tmp[1][0].toUpperCase();
-    this.setState({
-      initials
-    })
-    return initials;
+    if (displayName) {
+      const tmp = displayName.split(" ");
+      let initials = tmp[0][0].toUpperCase() + tmp[1][0].toUpperCase();
+      this.setState({
+        initials,
+      });
+      return initials;
+    }
   };
 
   render() {
-      const { displayName, email,initials } = this.state;
+    const { displayName, email, initials } = this.state;
     return (
       <div className='profile'>
         <div className='profile__user'>
@@ -58,4 +70,8 @@ class User extends Component {
   }
 }
 
-export default User;
+const mapDispatchToProps = (dispatch) => ({
+  fromSignUp: (status) => dispatch(fromSignUp(status)),
+});
+
+export default connect(null, mapDispatchToProps)(User);
