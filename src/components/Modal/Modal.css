@@ -1,0 +1,25 @@
+.modal {
+  width: 800px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__image__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal__image {
+  width: 250px;
+  height: 200px;
+  border: 1px solid red;
+}
