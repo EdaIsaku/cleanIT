@@ -1,3 +1,4 @@
+
 import "./Modal.css";
 
 function Modal() {
