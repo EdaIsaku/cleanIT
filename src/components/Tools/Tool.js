@@ -1,10 +1,13 @@
 import "./Tools.css";
-import image from "../../assets/bgImg.jpg";
 
-function Tool({ handleClick }) {
+function Tool({ handleClick, image, isClicked }) {
   return (
     <div onClick={handleClick}>
-      <img className='tool__icon' src={image} alt='img' />
+      <img
+        className={isClicked ? "tool__icon-animate" : "tool__icon"}
+        src={image}
+        alt='img'
+      />
     </div>
   );
 }

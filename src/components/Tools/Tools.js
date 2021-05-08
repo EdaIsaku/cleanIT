@@ -1,16 +1,20 @@
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import "./Tools.css";
 import Tool from "./Tool";
 import { addGarbage } from "./../../redux/actions/toolsAction";
+import image from "../../assets/Recycle_Bin.png";
 
 function Tools({ addGarbage, addGarbageStatus }) {
+  const [isClicked, setisClicked] = useState(false);
   const handleClick = () => {
     addGarbage(!addGarbageStatus);
+    setisClicked(!isClicked);
   };
   return (
     <div className='tools'>
-      <Tool handleClick={handleClick} />
+      <Tool handleClick={handleClick} image={image} isClicked={isClicked} />
       <Tool />
     </div>
   );

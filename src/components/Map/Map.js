@@ -7,6 +7,7 @@ import Events from "./Events";
 import "./Map.css";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import { connect } from "react-redux";
+import Modal from "../Modal/Modal";
 
 let cleaned = true;
 class Map extends Component {
@@ -20,6 +21,16 @@ class Map extends Component {
     // this.searchInput = React.createRef();
   }
 
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     const input = document.querySelector(
+  //       ".leaflet-container .geocoder-control-input.geocoder-control-input"
+  //     );
+  //     input.placeholder = "Hio";
+  //     console.log(input);
+  //   }, 1000);
+  // }
+
   handleMapClick = (e) => {
     const {
       latlng: { lat, lng },
@@ -32,17 +43,12 @@ class Map extends Component {
   render() {
     //center of map in first render
     const center = [41.327953, 19.819025];
-    const { markers } = this.state;
+    const { markers, cursor } = this.state;
     const { addGarbage } = this.props;
     console.log("from Map", addGarbage);
     return (
       <div className='main__body'>
-        <MapContainer
-          center={center}
-          zoom={15}
-          scrollWheelZoom={true}
-          style={{ cursor: addGarbage ? "crosshair" : "pointer" }}
-        >
+        <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
           <BasemapLayer name='Topographic' />
           <EsriLeafletGeoSearch
             providers={{
@@ -67,6 +73,7 @@ class Map extends Component {
           {markers.map((e) => (
             <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />
           ))}
+          <Modal />
         </MapContainer>
       </div>
     );
