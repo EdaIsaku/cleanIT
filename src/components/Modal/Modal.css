@@ -1,0 +1,43 @@
+.modal__bg {
+  position: absolute;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+  width: 40%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.modal__header {
+  color: rgba(0, 0, 0, 0.6);
+}
+.modal__close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: #bbb;
+  transition: all 0.2s;
+}
+.modal__close:hover {
+  color: red;
+  transform: scale(1.2);
+}
+
+.modal__textarea {
+  width: 80%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  resize: none;
+  padding: 15px;
+}
