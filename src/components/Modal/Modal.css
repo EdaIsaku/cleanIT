@@ -1,4 +1,3 @@
-
 .modal__bg {
   position: absolute;
   z-index: 9999;
@@ -15,12 +14,15 @@
   background-color: rgba(255, 255, 255, 1);
   width: 40%;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px #ccc;
+  -webkit-box-shadow: 1px 1px 22px 3px rgba(237, 230, 237, 1);
+  -moz-box-shadow: 1px 1px 22px 3px rgba(237, 230, 237, 1);
+  box-shadow: 1px 1px 22px 3px rgba(237, 230, 237, 1);
 }
 
 .modal__header {
   color: rgba(0, 0, 0, 0.6);
 }
+
 .modal__close {
   position: absolute;
   top: 15px;
@@ -30,9 +32,16 @@
   color: #bbb;
   transition: all 0.2s;
 }
+
 .modal__close:hover {
   color: red;
   transform: scale(1.2);
+}
+
+.modal__file {
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px 10px;
 }
 
 .modal__textarea {
@@ -41,4 +50,41 @@
   outline: none;
   resize: none;
   padding: 15px;
+}
 
+.modal__imagePreview {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.modal__imagePreview > img {
+  width: 9rem;
+  height: 11rem;
+}
+
+.modal__button {
+  padding: 1rem 2.5rem;
+  font-size: 1.4rem;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0.5rem 1rem 1rem 0.5rem;
+  transition: all 0.3s;
+}
+
+.modal__button:hover {
+  /* position: relative;
+  top: 1px; */
+  transform: scale(1.05);
+}
+
+.modal__button-submit {
+  background-color: green;
+}
+
+.modal__button-cancel {
+  background-color: red;
+}
