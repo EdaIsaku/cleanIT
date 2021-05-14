@@ -10,6 +10,9 @@
 }
 
 .modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   background-color: rgba(255, 255, 255, 1);
   width: 40%;
@@ -21,6 +24,7 @@
 
 .modal__header {
   color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
 }
 
 .modal__close {
@@ -38,12 +42,62 @@
   transform: scale(1.2);
 }
 
-.modal__file {
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 5px 10px;
+.modal__input__file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
+.modal__input__label {
+}
+
+.modal__input__label-left {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 50px;
+  background: #ec008c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fc6767,
+    #ec008c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fc6767,
+    #ec008c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.modal__input__label-right {
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  margin-left: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+  font-weight: 300;
+  cursor: pointer;
+}
+.modal__label:hover {
+  background: #ec008c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #fc6767,
+    #ec008c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #fc6767,
+    #ec008c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .modal__textarea {
   width: 80%;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -51,40 +105,101 @@
   resize: none;
   padding: 15px;
 }
+.modal__noImage {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
 
 .modal__imagePreview {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
+  width: 80%;
+  max-height: 50%;
 }
 
 .modal__imagePreview > img {
-  width: 9rem;
-  height: 11rem;
+  width: 30%;
+  height: 30%;
+}
+
+.modal__actions {
+  display: flex;
 }
 
 .modal__button {
-  padding: 1rem 2.5rem;
-  font-size: 1.4rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.2rem;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   margin: 0.5rem 1rem 1rem 0.5rem;
-  transition: all 0.3s;
-}
-
-.modal__button:hover {
-  /* position: relative;
-  top: 1px; */
-  transform: scale(1.05);
+  transition: all 0.1s;
 }
 
 .modal__button-submit {
-  background-color: green;
+  background: #1d976c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #56b97b,
+    #1d976c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #56b97b,
+    #1d976c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+}
+.modal__button-submit:active {
+  position: relative;
+  top: 1px;
+}
+.modal__button-submit:hover {
+  background: #1d976c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #56b97b,
+    #1d976c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #56b97b,
+    #1d976c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .modal__button-cancel {
-  background-color: red;
+  background: #e52d27; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b31217,
+    #e52d27
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b31217,
+    #e52d27
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.modal__button-cancel:active {
+  position: relative;
+  top: 1px;
+}
+.modal__button-cancel:hover {
+  background: #e52d27; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #b31217,
+    #e52d27
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #b31217,
+    #e52d27
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

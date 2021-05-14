@@ -2,34 +2,18 @@ import React, { Component } from "react";
 import { MapContainer } from "react-leaflet";
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
 import { BasemapLayer } from "react-esri-leaflet";
-import CustomMarker from "./Marker";
-import Events from "./Events";
-import "./Map.css";
-import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import { connect } from "react-redux";
-import Modal from "../Modal/Modal";
+import CustomMarker from "./Marker";
+import { showModal } from "../../redux/actions/toolsAction";
+import Events from "./Events";
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
+import "./Map.css";
 
 let cleaned = true;
 class Map extends Component {
   state = {
     markers: [],
   };
-
-  constructor(props) {
-    super(props);
-    //TODO
-    // this.searchInput = React.createRef();
-  }
-
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     const input = document.querySelector(
-  //       ".leaflet-container .geocoder-control-input.geocoder-control-input"
-  //     );
-  //     input.placeholder = "Hio";
-  //     console.log(input);
-  //   }, 1000);
-  // }
 
   handleMapClick = (e) => {
     const {
@@ -38,6 +22,7 @@ class Map extends Component {
     this.setState((prevState) => ({
       markers: prevState.markers.concat({ lat, lng }),
     }));
+    this.props.showModal(true);
   };
 
   render() {
@@ -73,7 +58,6 @@ class Map extends Component {
           {markers.map((e) => (
             <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />
           ))}
-          <Modal />
         </MapContainer>
       </div>
     );
@@ -84,4 +68,8 @@ const mapStateToProps = (state) => ({
   addGarbage: state.tools.addGarbage,
 });
 
-export default connect(mapStateToProps)(Map);
+const mapDispatchToProps = (dispatch) => ({
+  showModal: (status) => dispatch(showModal(status)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

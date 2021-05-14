@@ -4,3 +4,10 @@ export const addGarbage = (status) => {
     payload: status,
   };
 };
+
+export const showModal = (status) => {
+  return {
+    type: "SHOW_MODAL",
+    payload: status,
+  };
+};
