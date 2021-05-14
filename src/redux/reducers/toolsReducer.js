@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
   addGarbage: false,
+  showModal: false,
 };
 
 const toolsReducer = (state = INITIAL_STATE, action) => {
@@ -8,6 +9,11 @@ const toolsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         addGarbage: action.payload,
+      };
+    case "SHOW_MODAL":
+      return {
+        ...state,
+        showModal: action.payload,
       };
 
     default:
