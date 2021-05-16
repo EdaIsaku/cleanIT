@@ -3,30 +3,39 @@
 .slide-container-two {
   width: 40%;
 }
+
 .slide-container-one {
   width: 85%;
 }
 
+.grayscale-cleaned {
+  filter: grayscale(100%);
+}
+
 .each-fade {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80%;
+}
+
+.image-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
-.each-fade > div {
-  width: 100%;
-}
-
-.each-fade > div img {
+.each-fade > div > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-
-.leaflet-popup-content-wrapper {
-  width: 100%;
-  height: 100%;
+.each-fade > div > p {
+  margin: 0;
+  padding-top: 5px;
 }
 
 .leaflet-popup-content {
@@ -37,26 +46,58 @@
   margin: 13px 0px;
 }
 
-.grayscale-cleaned {
-  filter: grayscale(100%);
+.leaflet-popup-content-wrapper {
+  width: 100%;
+  text-align: center;
 }
 
+/* close button */
+.leaflet-container a.leaflet-popup-close-button {
+  transition: all 0.2s;
+}
 
-  .leaflet-popup-content-wrapper {
-    width: 100%;
-    height: 100%;
-  }
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: red;
+  transform: scale(1.2);
+}
 
-  .leaflet-popup-content {
-      display: flex;
-      width: 100% !important;
-      height: 100%;
-      justify-content: space-around;
-      margin: 13px 0px;
-  }
+.image-info {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
 
-  .grayscale-cleaned{
-    filter: grayscale(100%);
-  }
+.image-author {
+  font-size: 1.1rem;
+  padding: 5px;
+  color: #444;
+}
 
- 
+.image-edit {
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  color: #b31217;
+  border: 1px solid #b31217;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.image-edit:hover {
+  background: #e52d27; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b31217,
+    #e52d27
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #b31217, #e52d27);
+  color: #fff;
+  outline: none;
+  border: none;
+  transition: all 0.05s;
+  color: #fff;
+}

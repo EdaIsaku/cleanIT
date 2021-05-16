@@ -9,7 +9,7 @@ import Events from "./Events";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import "./Map.css";
 
-let cleaned = true;
+let cleaned = false;
 class Map extends Component {
   state = {
     markers: [],
@@ -32,9 +32,9 @@ class Map extends Component {
     const { addGarbage } = this.props;
     console.log("from Map", addGarbage);
     return (
-      <div className='main__body'>
+      <div className="main__body">
         <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
-          <BasemapLayer name='Topographic' />
+          <BasemapLayer name="Topographic" />
           <EsriLeafletGeoSearch
             providers={{
               arcgisOnlineProvider: {

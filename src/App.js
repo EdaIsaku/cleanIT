@@ -1,11 +1,5 @@
 import { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -37,15 +31,15 @@ class App extends Component {
     const { currentUser, fromSignUp } = this.props;
     console.log("These are props", this.props);
     return (
-      <div className='App'>
+      <div className="App">
         <Router>
-          <Route exact path='/'>
-            {currentUser && !fromSignUp ? <Redirect to='/app' /> : <LogIn />}
+          <Route exact path="/">
+            {currentUser && !fromSignUp ? <Redirect to="/app" /> : <LogIn />}
           </Route>
-          <Route exact path='/app'>
+          <Route exact path="/app">
             <Main user={currentUser} />
           </Route>
-          <Route exact path='/login'>
+          <Route exact path="/login">
             <LogIn />
           </Route>
         </Router>
