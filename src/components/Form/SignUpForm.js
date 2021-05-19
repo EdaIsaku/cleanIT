@@ -157,6 +157,7 @@ class SignUpForm extends React.Component {
       result = "error";
       message = "Username is too short or empty!";
     }
+
     if (!/^([^0-9]*)$/.test(username)) {
       result = "error";
       message = "Username can not contain numbers!";

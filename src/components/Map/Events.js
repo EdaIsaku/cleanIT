@@ -4,7 +4,7 @@ function Events({ handleMapClick }) {
   const map = useMapEvent("click", (e) => {
     handleMapClick(e);
     //if needed to move map
-    // map.flyTo(e.latlng, map.getZoom())
+    // map.flyTo(e.latlng, map.getZoom());
   });
   return null;
 }

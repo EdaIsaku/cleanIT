@@ -2,9 +2,9 @@ import React from "react";
 import Input from "../Input/Input";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
-import {connect} from 'react-redux'
-import { auth} from "../../firebase";
-import {fromSignUp} from '../../redux/actions/userActions'
+import { connect } from "react-redux";
+import { auth } from "../../firebase";
+import { fromSignUp } from "../../redux/actions/userActions";
 
 class SignInForm extends React.Component {
   state = {
@@ -24,6 +24,7 @@ class SignInForm extends React.Component {
   };
 
   handleChange = (ev) => {
+    //Value based on input name
     const { name, value } = ev.target;
     this.setState({
       [name]: value,
@@ -42,7 +43,7 @@ class SignInForm extends React.Component {
         // Signed in
         var user = userCredential.user;
         if (user) {
-          this.props.fromSignUp(false)
+          this.props.fromSignUp(false);
         }
       })
       .catch((error) => {
@@ -121,7 +122,6 @@ class SignInForm extends React.Component {
       return true;
     }
   };
-
   validatePassword = () => {
     const { password } = this.state;
     let {
@@ -158,12 +158,14 @@ class SignInForm extends React.Component {
     this.validatePassword(password);
   };
 
+  //If any errors present in state
   checkInput = (input) => {
     const { result, message } = this.state.errors[input];
     return { result, message };
   };
 
   render() {
+    //Activate on submit
     const { shouldCheckInput } = this.state;
     return (
       <Fade right duration={600} distance='50px'>
@@ -196,7 +198,7 @@ class SignInForm extends React.Component {
           <Link className='form__link' to='/signUp'>
             Don't have an account yet?
           </Link>
-          <Link className='form__link' to='/forgotPassword'>
+          <Link className='form__link' to='/forgot'>
             Forgot your password?
           </Link>
         </div>
@@ -206,7 +208,7 @@ class SignInForm extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-      fromSignUp: (status) => dispatch(fromSignUp(status))
-})
+  fromSignUp: (status) => dispatch(fromSignUp(status)),
+});
 
-export default connect(null,mapDispatchToProps)(SignInForm);
+export default connect(null, mapDispatchToProps)(SignInForm);

@@ -28,13 +28,12 @@ class Map extends Component {
   render() {
     //center of map in first render
     const center = [41.327953, 19.819025];
-    const { markers, cursor } = this.state;
+    const { markers } = this.state;
     const { addGarbage } = this.props;
-    console.log("from Map", addGarbage);
     return (
-      <div className="main__body">
+      <div className='main__body'>
         <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
-          <BasemapLayer name="Topographic" />
+          <BasemapLayer name='Topographic' />
           <EsriLeafletGeoSearch
             providers={{
               arcgisOnlineProvider: {
@@ -58,6 +57,14 @@ class Map extends Component {
           {markers.map((e) => (
             <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />
           ))}
+          {/* TODO if wanna change cursor */}
+          {/* <div
+            style={{
+              cursor: addGarbage ? "crosshair" : "pointer",
+              width: "100vw",
+              height: "100vh",
+            }}
+          ></div> */}
         </MapContainer>
       </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Popup, Marker } from "react-leaflet";
-import FadeExample from "../Slideshow/Slideshow";
+import Slideshow from "../Slideshow/Slideshow";
 
 function CustomMarker({ center, cleaned }) {
   return (
@@ -14,8 +14,8 @@ function CustomMarker({ center, cleaned }) {
       }}
     >
       <Popup className={cleaned ? "image__popup-two" : "image__popup-one"}>
-        <FadeExample cleaned={cleaned} order={"first"} />
-        {cleaned ? <FadeExample cleaned={cleaned} order={"second"} /> : null}
+        <Slideshow cleaned={cleaned} order={"first"} />
+        {cleaned ? <Slideshow cleaned={cleaned} order={"second"} /> : null}
       </Popup>
     </Marker>
   );

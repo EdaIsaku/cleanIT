@@ -3,16 +3,15 @@ import { FiPaperclip } from "react-icons/fi";
 import "./Modal.css";
 import { showModal } from "../../redux/actions/toolsAction";
 
-function Modal({ showModal }) {
+function Modal({ showModal, isModalVisible }) {
   let hasPicture = true;
-
   function closeModal(ev) {
     if (ev.target === ev.currentTarget) {
       showModal(false);
     }
   }
 
-  return (
+  return !isModalVisible ? null : (
     <div className='modal__bg' onClick={closeModal}>
       <div className='modal'>
         <h1 className='modal__header'>Make our city cleaner!</h1>
@@ -91,4 +90,7 @@ const mapDispatchToProps = (dispatch) => ({
   showModal: (status) => dispatch(showModal(status)),
 });
 
-export default connect(null, mapDispatchToProps)(Modal);
+const mapStateToProps = (state) => ({
+  isModalVisible: state.tools.isModalVisible,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

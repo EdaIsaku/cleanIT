@@ -14,24 +14,23 @@ function Main({ user, history, showModal }) {
   useEffect(() => {
     setTimeout(() => {
       if (!user) {
-        history.push("/");
+        history.push("/signIn");
       }
     }, 1000);
-    console.log(showModal);
-  }, [showModal]);
+  }, [user]);
 
   return (
     <div className='main'>
       <User user={user} />
       <Tools />
       <Map />
-      {showModal && <Modal />}
+      <Modal />
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-  showModal: state.tools.showModal,
+  isModalVIsible: state.tools.isModalVisible,
 });
 
 export default compose(withRouter, connect(mapStateToProps))(Main);

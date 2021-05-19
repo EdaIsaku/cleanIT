@@ -1,19 +1,21 @@
+import { ADD_GARBAGE, SHOW_MODAL } from "./../types";
+
 const INITIAL_STATE = {
   addGarbage: false,
-  showModal: false,
+  isModalVisible: false,
 };
 
 const toolsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "ADD_GARBAGE":
+    case ADD_GARBAGE:
       return {
         ...state,
         addGarbage: action.payload,
       };
-    case "SHOW_MODAL":
+    case SHOW_MODAL:
       return {
         ...state,
-        showModal: action.payload,
+        isModalVisible: action.payload,
       };
 
     default:
