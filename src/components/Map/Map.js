@@ -2,50 +2,46 @@ import React, { Component } from "react";
 import { MapContainer } from "react-leaflet";
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
 import { BasemapLayer } from "react-esri-leaflet";
-import CustomMarker from "./Marker";
-import Events from "./Events";
-import "./Map.css";
-import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import { connect } from "react-redux";
-import Modal from "../Modal/Modal";
+import CustomMarker from "./CustomMarker";
+import { showModal } from "../../redux/actions/toolsAction";
+import Events from "./Events";
+import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
+import "./Map.css";
+import Bin from "../../assets/garbbage.png";
+import Markers from "../../data";
 
-let cleaned = true;
 class Map extends Component {
   state = {
     markers: [],
   };
 
-  constructor(props) {
-    super(props);
-    //TODO
-    // this.searchInput = React.createRef();
+  componentDidMount() {
+    this.setState({
+      markers: Markers,
+    });
   }
 
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     const input = document.querySelector(
-  //       ".leaflet-container .geocoder-control-input.geocoder-control-input"
-  //     );
-  //     input.placeholder = "Hio";
-  //     console.log(input);
-  //   }, 1000);
-  // }
-
   handleMapClick = (e) => {
-    const {
-      latlng: { lat, lng },
-    } = e;
-    this.setState((prevState) => ({
-      markers: prevState.markers.concat({ lat, lng }),
-    }));
+    if (this.props.addGarbage) {
+      const {
+        latlng: { lat, lng },
+      } = e;
+      this.setState((prevState) => ({
+        markers: prevState.markers.concat({ lat, lng }),
+      }));
+      this.props.showModal(true);
+    } else {
+      return null;
+    }
   };
 
   render() {
     //center of map in first render
     const center = [41.327953, 19.819025];
-    const { markers, cursor } = this.state;
+    const { markers } = this.state;
     const { addGarbage } = this.props;
-    console.log("from Map", addGarbage);
+    console.log(markers);
     return (
       <div className='main__body'>
         <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
@@ -71,9 +67,23 @@ class Map extends Component {
 
           <Events handleMapClick={this.handleMapClick} />
           {markers.map((e) => (
-            <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />
+            <CustomMarker
+              key={e.id}
+              center={[e.location.lat, e.location.lng]}
+              cleaned={e.cleaned}
+              images={e.images}
+              author={e.author}
+            />
           ))}
-          <Modal />
+
+          <div
+            className='dummyDivForCursor'
+            style={{
+              cursor: addGarbage ? `url(${Bin}),auto` : "pointer",
+              width: "100vw",
+              height: "100vh",
+            }}
+          ></div>
         </MapContainer>
       </div>
     );
@@ -84,4 +94,8 @@ const mapStateToProps = (state) => ({
   addGarbage: state.tools.addGarbage,
 });
 
-export default connect(mapStateToProps)(Map);
+const mapDispatchToProps = (dispatch) => ({
+  showModal: (status) => dispatch(showModal(status)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

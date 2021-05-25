@@ -1,11 +1,5 @@
 import { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -39,15 +33,15 @@ class App extends Component {
     return (
       <div className='App'>
         <Router>
-          <Route exact path='/'>
-            {currentUser && !fromSignUp ? <Redirect to='/app' /> : <LogIn />}
-          </Route>
-          <Route exact path='/app'>
-            <Main user={currentUser} />
-          </Route>
-          <Route exact path='/login'>
-            <LogIn />
-          </Route>
+          <Switch>
+            <Route path='/'>
+              {currentUser && !fromSignUp ? (
+                <Main user={currentUser} />
+              ) : (
+                <LogIn />
+              )}
+            </Route>
+          </Switch>
         </Router>
       </div>
     );

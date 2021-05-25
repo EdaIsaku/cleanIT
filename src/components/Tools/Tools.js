@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "./Tools.css";
 import Tool from "./Tool";
 import { addGarbage } from "./../../redux/actions/toolsAction";
-import image from "../../assets/Recycle_Bin.png";
+import image from "../../assets/garbbage.png";
 
 function Tools({ addGarbage, addGarbageStatus }) {
   const [isClicked, setisClicked] = useState(false);
