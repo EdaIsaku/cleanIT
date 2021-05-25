@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { auth } from "../../firebase";
 import { fromSignUp } from "../../redux/actions/userActions";
+import { getInitials } from "../../utils";
 
 import "./User.css";
 
@@ -22,7 +23,7 @@ class User extends Component {
           displayName: this.props.user.displayName,
           email: this.props.user.email,
         },
-        () => this.getInitials(this.state.displayName)
+        () => this.setState({ initials: getInitials(this.state.displayName) })
       );
     }
   }
@@ -34,18 +35,6 @@ class User extends Component {
   handleSignOut = () => {
     this.props.fromSignUp(true);
     auth.signOut();
-  };
-
-  getInitials = (displayName) => {
-    if (displayName) {
-      const userName = displayName.split(" ");
-      let [name = "", lname = " "] = userName;
-      let initials = name[0].toUpperCase() + lname[0].toUpperCase();
-      this.setState({
-        initials,
-      });
-      return initials;
-    }
   };
 
   render() {

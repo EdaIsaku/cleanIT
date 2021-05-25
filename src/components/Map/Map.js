@@ -3,26 +3,37 @@ import { MapContainer } from "react-leaflet";
 import EsriLeafletGeoSearch from "react-esri-leaflet/plugins/EsriLeafletGeoSearch";
 import { BasemapLayer } from "react-esri-leaflet";
 import { connect } from "react-redux";
-import CustomMarker from "./Marker";
+import CustomMarker from "./CustomMarker";
 import { showModal } from "../../redux/actions/toolsAction";
 import Events from "./Events";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import "./Map.css";
+import Bin from "../../assets/garbbage.png";
+import Markers from "../../data";
 
-let cleaned = false;
 class Map extends Component {
   state = {
     markers: [],
   };
 
+  componentDidMount() {
+    this.setState({
+      markers: Markers,
+    });
+  }
+
   handleMapClick = (e) => {
-    const {
-      latlng: { lat, lng },
-    } = e;
-    this.setState((prevState) => ({
-      markers: prevState.markers.concat({ lat, lng }),
-    }));
-    this.props.showModal(true);
+    if (this.props.addGarbage) {
+      const {
+        latlng: { lat, lng },
+      } = e;
+      this.setState((prevState) => ({
+        markers: prevState.markers.concat({ lat, lng }),
+      }));
+      this.props.showModal(true);
+    } else {
+      return null;
+    }
   };
 
   render() {
@@ -30,6 +41,7 @@ class Map extends Component {
     const center = [41.327953, 19.819025];
     const { markers } = this.state;
     const { addGarbage } = this.props;
+    console.log(markers);
     return (
       <div className='main__body'>
         <MapContainer center={center} zoom={15} scrollWheelZoom={true}>
@@ -55,16 +67,23 @@ class Map extends Component {
 
           <Events handleMapClick={this.handleMapClick} />
           {markers.map((e) => (
-            <CustomMarker center={[e.lat, e.lng]} cleaned={cleaned} />
+            <CustomMarker
+              key={e.id}
+              center={[e.location.lat, e.location.lng]}
+              cleaned={e.cleaned}
+              images={e.images}
+              author={e.author}
+            />
           ))}
-          {/* TODO if wanna change cursor */}
-          {/* <div
+
+          <div
+            className='dummyDivForCursor'
             style={{
-              cursor: addGarbage ? "crosshair" : "pointer",
+              cursor: addGarbage ? `url(${Bin}),auto` : "pointer",
               width: "100vw",
               height: "100vh",
             }}
-          ></div> */}
+          ></div>
         </MapContainer>
       </div>
     );
