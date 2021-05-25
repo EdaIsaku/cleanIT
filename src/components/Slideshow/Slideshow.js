@@ -10,7 +10,6 @@ const Slideshow = ({ cleaned, order, showModal, author, images }) => {
   function handleButtonClick() {
     showModal(true);
   }
-  console.log(images);
   return (
     <div className={cleaned ? "slide-container-two" : "slide-container-one"}>
       <Fade
@@ -20,16 +19,16 @@ const Slideshow = ({ cleaned, order, showModal, author, images }) => {
         {images.map((el) => {
           return (
             <>
-              <div className='each-fade'>
-                <div className='image-container'>
-                  <img src={el} alt='img' />
+              <div className="each-fade">
+                <div className="image-container">
+                  <img src={el} alt="img" />
                 </div>
               </div>
-              <div className='image-info'>
-                <p className='image-author'>
+              <div className="image-info">
+                <p className="image-author">
                   Reported by {author && displayUserName(author)}{" "}
                 </p>
-                <button className='image-edit' onClick={handleButtonClick}>
+                <button className="image-edit" onClick={handleButtonClick}>
                   Edit
                 </button>
               </div>

@@ -3,6 +3,7 @@ import { useMapEvent } from "react-leaflet";
 function Events({ handleMapClick }) {
   const map = useMapEvent("click", (e) => {
     handleMapClick(e);
+    console.log("clicked");
     //if needed to move map
     // map.flyTo(e.latlng, map.getZoom());
   });

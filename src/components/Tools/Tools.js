@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import "./Tools.css";
 import Tool from "./Tool";
 import { addGarbage } from "./../../redux/actions/toolsAction";
-import image from "../../assets/garbbage.png";
+import garbbage from "../../assets/garbbage.png";
+import cleaned from "../../assets/cleaned.png";
 
 function Tools({ addGarbage, addGarbageStatus }) {
   const [isClicked, setisClicked] = useState(false);
@@ -13,8 +14,8 @@ function Tools({ addGarbage, addGarbageStatus }) {
     setisClicked(!isClicked);
   };
   return (
-    <div className='tools'>
-      <Tool handleClick={handleClick} image={image} isClicked={isClicked} />
+    <div className="tools">
+      <Tool handleClick={handleClick} image={garbbage} isClicked={isClicked} />
       <Tool />
     </div>
   );
